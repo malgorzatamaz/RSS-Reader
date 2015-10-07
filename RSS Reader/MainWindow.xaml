@@ -8,6 +8,7 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.245,-1.725"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="113,10,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
