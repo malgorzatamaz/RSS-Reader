@@ -1,36 +1,63 @@
-﻿<Window x:Class="RSS_Reader.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RSS_Reader"
-        mc:Ignorable="d"
-        Title="RSS Reader" Height="480" Width="640">
+﻿<controls:MetroWindow x:Class="RSS_Reader.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      Title="RSS Reader"
+                      Width="640"
+                      Height="480"
+                      Background="AntiqueWhite"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      ResizeMode="CanResizeWithGrip"
+                      WindowStartupLocation="CenterScreen"
+                      mc:Ignorable="d">
     <Window.Resources>
-        <XmlDataProvider x:Key="rssData" XPath="//item" Source="http://interia.pl.feedsportal.com/c/34004/f/618045/index.rss"/>
+        <XmlDataProvider x:Key="rssData"
+                         Source="http://interia.pl.feedsportal.com/c/34004/f/618045/index.rss"
+                         XPath="//item" />
     </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <ListBox x:Name="rssItems" Margin="3" ItemsSource="{Binding Source={StaticResource rssData}}" SelectedIndex="0" 
-                 Grid.Row="0">
+        <ListBox x:Name="rssItems"
+                 Grid.Row="0"
+                 Margin="3"
+                 ItemsSource="{Binding Source={StaticResource rssData}}"
+                 SelectedIndex="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Width="50" Margin="3" Source="{Binding XPath=enclosure/@url}" />
-                        <TextBlock Margin="3" VerticalAlignment="Center" Text="{Binding XPath=title}" FontWeight="Bold" />
+                        <Image Width="50"
+                               Margin="3"
+                               Source="{Binding XPath=enclosure/@url}" />
+                        <TextBlock Margin="3"
+                                   VerticalAlignment="Center"
+                                   FontWeight="Bold"
+                                   Text="{Binding XPath=title}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Orientation="Vertical" DataContext="{Binding ElementName=rssItems, Path=SelectedItem}"
-                    Grid.Row="1">
-            <TextBlock Margin="3" FontSize="13" FontWeight="Bold" Text="{Binding XPath=title, Path=InnerText}"/>
-            <TextBlock Margin="3" Opacity="0.72" Text="{Binding XPath=pubDate}"/>
-            <TextBlock Margin="3" FontStyle="Italic" Text="{Binding XPath=description, Path=InnerText}"/>
+        <StackPanel Grid.Row="1"
+                    DataContext="{Binding ElementName=rssItems,
+                                          Path=SelectedItem}"
+                    Orientation="Vertical">
+            <TextBlock Margin="3"
+                       FontSize="13"
+                       FontWeight="Bold"
+                       Text="{Binding XPath=title,
+                                      Path=InnerText}" />
+            <TextBlock Margin="3"
+                       Opacity="0.72"
+                       Text="{Binding XPath=pubDate}" />
+            <TextBlock Margin="3"
+                       FontStyle="Italic"
+                       Text="{Binding XPath=description,
+                                      Path=InnerText}" />
         </StackPanel>
     </Grid>
-</Window>
+</controls:MetroWindow>
