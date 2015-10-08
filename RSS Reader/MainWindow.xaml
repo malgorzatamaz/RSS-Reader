@@ -34,7 +34,7 @@
                         <Image Width="50"
                                Margin="3"
                                Source="{Binding XPath=enclosure/@url}" />
-                        <TextBlock Margin="3"
+                        <TextBlock Margin="3" Name="TxbTitle"
                                    VerticalAlignment="Center"
                                    FontWeight="Bold"
                                    Text="{Binding XPath=title}" />
@@ -45,19 +45,20 @@
         <StackPanel Grid.Row="1"
                     DataContext="{Binding ElementName=rssItems,
                                           Path=SelectedItem}"
-                    Orientation="Vertical">
-            <TextBlock Margin="3"
+                    Orientation="Vertical" Margin="0,0,0,52">
+            <TextBlock Margin="3" Name="TxbTitle"
                        FontSize="13"
                        FontWeight="Bold"
                        Text="{Binding XPath=title,
                                       Path=InnerText}" />
-            <TextBlock Margin="3"
+            <TextBlock Margin="3" Name="TxbDate"
                        Opacity="0.72"
                        Text="{Binding XPath=pubDate}" />
-            <TextBlock Margin="3"
+            <TextBlock Margin="3" Name="TxbDescription"
                        FontStyle="Italic"
                        Text="{Binding XPath=description,
                                       Path=InnerText}" />
         </StackPanel>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="99,195,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </controls:MetroWindow>

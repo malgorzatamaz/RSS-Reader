@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using System.Web;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 
 namespace RSS_Reader
@@ -25,5 +14,23 @@ namespace RSS_Reader
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            News entry=new News();
+            entry.Title = TxbTitle.Text;
+            entry.Date = TxbDate.Text;
+            entry.Description = TxbDescription.Text;
+            StringWriter myWriter = new StringWriter();
+            HttpUtility.HtmlDecode(entry.Description, myWriter);
+            string decode = myWriter.ToString(); // potrzebny nam tekst mamy w <p>...</p>         
+        }
+    }
+
+    public class News
+    {
+        public string Title { get; set; }
+        public string Date { get; set; }
+        public string Description { get; set; }
     }
 }
