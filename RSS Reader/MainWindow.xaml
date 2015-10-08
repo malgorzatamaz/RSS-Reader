@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RSS_Reader"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.245,-1.725"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="113,10,0,0" VerticalAlignment="Top" Width="120"/>
+        Title="MainWindow" Height="339.474" Width="611.842" Background="{x:Null}">
+    <Grid Background="#FFFFAB32">
+        <Label x:Name="LblCanalList" Content="Lista kanałów" Foreground="White" HorizontalAlignment="Left" Height="33" Margin="10,3,0,0" VerticalAlignment="Top" Width="111" FontSize="16" RenderTransformOrigin="0.73,0.534"/>
+        <ListBox x:Name="LbxNews" HorizontalAlignment="Left" Height="262" Margin="207,36,0,0" VerticalAlignment="Top" Width="387" BorderThickness="4" Opacity="0.5" BorderBrush="#FFF74646"/>
+        <ListBox x:Name="LbxTopics" HorizontalAlignment="Left" Height="262" Margin="10,36,0,0" VerticalAlignment="Top" Width="183" BorderThickness="4" BorderBrush="#FFF74646" Opacity="0.5"/>
+        <Label x:Name="LblNews" Content="Wiadomość RSS" Foreground="White"  HorizontalAlignment="Left" Margin="207,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.198,0.348" Width="131" FontSize="16"/>
 
     </Grid>
 </Window>
