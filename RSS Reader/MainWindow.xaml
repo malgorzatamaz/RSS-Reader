@@ -30,7 +30,7 @@
                     Grid.Row="1">
             <TextBlock Margin="3" FontSize="13" FontWeight="Bold" Text="{Binding XPath=title, Path=InnerText}"/>
             <TextBlock Margin="3" Opacity="0.72" Text="{Binding XPath=pubDate}"/>
-            <TextBlock Margin="3" FontStyle="Italic" Text="{Binding XPath=description, Path=InnerText}"/>
+            <TextBlock Margin="3" FontStyle="Italic" TextWrapping="Wrap" Text="{Binding XPath=description, Path=InnerText}"/>
         </StackPanel>
     </Grid>
 </Window>
