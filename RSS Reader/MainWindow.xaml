@@ -5,10 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RSS_Reader"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.245,-1.725"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="113,10,0,0" VerticalAlignment="Top" Width="120"/>
+        Title="RSS Reader" Height="480" Width="640">
+    <Window.Resources>
+        <XmlDataProvider x:Key="rssData" XPath="//item" Source="http://interia.pl.feedsportal.com/c/34004/f/618045/index.rss"/>
+    </Window.Resources>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="rssItems" Margin="3" ItemsSource="{Binding Source={StaticResource rssData}}" SelectedIndex="0" 
+                 Grid.Row="0" Grid.RowSpan="3">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="50" Margin="3" Source="{Binding XPath=enclosure/@url}" />
+                        <TextBlock Margin="3" VerticalAlignment="Center" Text="{Binding XPath=title}" FontWeight="Bold" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
