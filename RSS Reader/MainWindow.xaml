@@ -16,7 +16,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <ListBox x:Name="rssItems" Margin="3" ItemsSource="{Binding Source={StaticResource rssData}}" SelectedIndex="0" 
-                 Grid.Row="0" Grid.RowSpan="3">
+                 Grid.Row="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -26,5 +26,11 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Orientation="Vertical" DataContext="{Binding ElementName=rssItems, Path=SelectedItem}"
+                    Grid.Row="1">
+            <TextBlock Margin="3" FontSize="13" FontWeight="Bold" Text="{Binding XPath=title, Path=InnerText}"/>
+            <TextBlock Margin="3" Opacity="0.72" Text="{Binding XPath=pubDate}"/>
+            <TextBlock Margin="3" FontStyle="Italic" Text="{Binding XPath=description, Path=InnerText}"/>
+        </StackPanel>
     </Grid>
 </Window>
