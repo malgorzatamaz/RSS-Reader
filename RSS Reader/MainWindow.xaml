@@ -5,12 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RSS_Reader"
         mc:Ignorable="d"
-        Title="MainWindow" Height="339.474" Width="611.842" Background="{x:Null}">
-    <Grid Background="#FFFFAB32">
-        <Label x:Name="LblCanalList" Content="Lista kanałów" Foreground="White" HorizontalAlignment="Left" Height="33" Margin="10,3,0,0" VerticalAlignment="Top" Width="111" FontSize="16" RenderTransformOrigin="0.73,0.534"/>
-        <ListBox x:Name="LbxNews" HorizontalAlignment="Left" Height="262" Margin="207,36,0,0" VerticalAlignment="Top" Width="387" BorderThickness="4" Opacity="0.5" BorderBrush="#FFF74646"/>
-        <ListBox x:Name="LbxTopics" HorizontalAlignment="Left" Height="262" Margin="10,36,0,0" VerticalAlignment="Top" Width="183" BorderThickness="4" BorderBrush="#FFF74646" Opacity="0.5"/>
-        <Label x:Name="LblNews" Content="Wiadomość RSS" Foreground="White"  HorizontalAlignment="Left" Margin="207,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.198,0.348" Width="131" FontSize="16"/>
+        Title="RSS Reader" Height="550.376" Width="649.022">
+    <Window.Resources>
+        <XmlDataProvider x:Key="rssData" XPath="//item" Source="http://interia.pl.feedsportal.com/c/34004/f/618045/index.rss"/>
+    </Window.Resources>
 
+    <Grid Height="492" VerticalAlignment="Bottom" Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="31"/>
+            <RowDefinition Height="307*"/>
+            <RowDefinition Height="154*"/>
+        </Grid.RowDefinitions>
+        <ComboBox Margin="5" Grid.Row="1" Grid.Column="0" />
+        <ListBox x:Name="rssItems" Margin="5,5,2,5" ItemsSource="{Binding Source={StaticResource rssData}}" SelectedIndex="0" 
+                 Grid.Row="2" Grid.Column="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="50" Margin="3" Source="{Binding XPath=enclosure/@url}" />
+                        <TextBlock Margin="3" VerticalAlignment="Center" Text="{Binding XPath=title}" FontWeight="Bold" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Vertical" DataContext="{Binding ElementName=rssItems, Path=SelectedItem}"
+                    Grid.Row="3" Grid.Column="0">
+            <TextBlock Margin="5" FontSize="13" FontWeight="Bold" Text="{Binding XPath=title, Path=InnerText}"/>
+            <TextBlock Margin="5" Opacity="0.72" Text="{Binding XPath=pubDate}"/>
+            <TextBlock Margin="3" FontStyle="Italic" Text="{Binding XPath=description, Path=InnerText}"/>
+        </StackPanel>
     </Grid>
 </Window>
