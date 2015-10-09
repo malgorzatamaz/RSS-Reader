@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using HtmlAgilityPack;
 using MahApps.Metro.Controls;
@@ -19,18 +20,6 @@ namespace RSS_Reader
     public partial class MainWindow : MetroWindow
     {
         public List<Category> Categories { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private string _categoryPath;
-        public string CategoryPath
-        {
-            get { return _categoryPath; }
-            set
-            {
-                _categoryPath = value;
-                OnPropertyChanged("CategoryPath");
-            }
-        }
         
         public MainWindow()
         {
@@ -76,23 +65,11 @@ namespace RSS_Reader
             }
             return list;
         }
-
-        protected void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-                handler(this, e);
-        }
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void CbxCategory_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        
+        private void CbxCategory_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var provider = (XmlDataProvider)this.Resources["rssData"];
-            provider.Source = new Uri(Categories[CbxCategory.SelectedIndex].Url); 
+            provider.Source = new Uri(Categories[CbxCategory.SelectedIndex].Url);
         }
     }
 
