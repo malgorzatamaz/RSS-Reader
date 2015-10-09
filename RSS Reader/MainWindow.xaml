@@ -15,20 +15,15 @@
                          Source="http://interia.pl.feedsportal.com/c/34004/f/618045/index.rss"
                          XPath="//item" />
     </Window.Resources>
-
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <Grid.Resources>
-            
-        </Grid.Resources>
-        <ComboBox Name="CbxCanals" ItemsSource="{Binding Categories}" DisplayMemberPath="Name"
-                  Height="20"  Margin="5" HorizontalAlignment="Left" Grid.Row="0" Width="250">
-        </ComboBox>
-        <Button Height="20" Width="230" HorizontalAlignment="Left" Margin="260,5,5,5" Grid.Row="0">Zapisz wszystkie w kategorii</Button>
+        <ComboBox Name="CbxCanals" ItemsSource="{Binding}" DisplayMemberPath="Name" 
+                  Height="20"  Margin="5" HorizontalAlignment="Left" Grid.Row="0" Width="250"/>
+            <Button Height="20" Width="230" HorizontalAlignment="Left" Margin="260,5,5,5" Grid.Row="0">Zapisz wszystkie w kategorii</Button>
         <Button Height="20" Width="230" HorizontalAlignment="Left" Margin="495,5,5,5"  Grid.Row="0">Zapisz wybrany</Button>
         <ListBox x:Name="rssItems"
                  Grid.Row="1"

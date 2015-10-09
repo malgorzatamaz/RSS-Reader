@@ -25,7 +25,8 @@ namespace RSS_Reader
             Categories.Add(new Category { Name = "ada", Url = "www.dads.pl" });
             
             InitializeComponent();
-            this.DataContext = Categories;
+            CbxCanals.DataContext = Categories;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
