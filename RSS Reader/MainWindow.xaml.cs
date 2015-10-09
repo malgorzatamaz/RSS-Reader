@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Web;
 using System.Windows;
 using MahApps.Metro.Controls;
+using RSS_Reader.Models;
 
 namespace RSS_Reader
 {
@@ -25,12 +27,10 @@ namespace RSS_Reader
             HttpUtility.HtmlDecode(entry.Description, myWriter);
             string decode = myWriter.ToString(); // potrzebny nam tekst mamy w <p>...</p>         
         }
+
+
+        public List<Category> Categories { get; set; }
     }
 
-    public class News
-    {
-        public string Title { get; set; }
-        public string Date { get; set; }
-        public string Description { get; set; }
-    }
+   
 }
