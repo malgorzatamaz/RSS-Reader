@@ -15,6 +15,9 @@ using RSS_Reader.DAL;
 using System.Xml;
 using System.Text;
 using System.Windows.Media.Imaging;
+using RSS_Reader.ViewModel;
+using RSS_Reader.ViewModel.Dto;
+
 
 namespace RSS_Reader
 {
@@ -36,6 +39,7 @@ namespace RSS_Reader
             InitializeComponent();
             Categories = GetCategories();
             CbxCategory.DataContext = Categories;
+            DataContext = new MainWindowViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -49,6 +53,7 @@ namespace RSS_Reader
             string decode = myWriter.ToString(); // potrzebny nam tekst mamy w <p>...</p>         
 
         }
+
         private List<Category> GetCategories()
         {
             List<Category> list = new List<Category>();
@@ -80,7 +85,7 @@ namespace RSS_Reader
         private void CbxCategory_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var provider = (XmlDataProvider)this.Resources["rssData"];
-            provider.Source = new Uri(Categories[CbxCategory.SelectedIndex].Url);
+            //provider.Source = new Uri(Categories[CbxCategory.SelectedIndex].Url);
         }
 
         private void BtnSaveAll_Click(object sender, RoutedEventArgs e)
