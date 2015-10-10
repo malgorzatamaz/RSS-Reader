@@ -27,7 +27,7 @@ namespace RSS_Reader
         private News _news { get; set; }
         private Category _selectedCategory { get; set; }
         private byte[] _newsPhoto { get; set; }
-        
+
         public List<Category> Categories { get; set; }
 
         public MainWindow()
@@ -138,7 +138,7 @@ namespace RSS_Reader
 
                     break;
                 }
-                            
+
             }
 
             if (!string.IsNullOrEmpty(photoUrl))
@@ -146,8 +146,8 @@ namespace RSS_Reader
                 WebClient webClient = new WebClient();
                 _newsPhoto = webClient.DownloadData(photoUrl);
             }
-                 
-            
+
+
         }
 
         private void ParseArticleID()
