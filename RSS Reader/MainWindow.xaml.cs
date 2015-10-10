@@ -11,6 +11,7 @@ using System.Windows.Data;
 using HtmlAgilityPack;
 using MahApps.Metro.Controls;
 using RSS_Reader.Models;
+using RSS_Reader.DAL;
 
 namespace RSS_Reader
 {
@@ -19,10 +20,13 @@ namespace RSS_Reader
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        private News _news { get; set; }
+        private Category _category { get; set; }
         public List<Category> Categories { get; set; }
         
         public MainWindow()
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDirectory);
             InitializeComponent();
             Categories = GetCategories();
             CbxCategory.DataContext = Categories;
@@ -37,6 +41,7 @@ namespace RSS_Reader
             StringWriter myWriter = new StringWriter();
             HttpUtility.HtmlDecode(entry.Description, myWriter);
             string decode = myWriter.ToString(); // potrzebny nam tekst mamy w <p>...</p>         
+            
         }
         private List<Category> GetCategories()
         {
@@ -70,6 +75,33 @@ namespace RSS_Reader
         {
             var provider = (XmlDataProvider)this.Resources["rssData"];
             provider.Source = new Uri(Categories[CbxCategory.SelectedIndex].Url);
+        }
+
+        private void BtnSaveAll_Click(object sender, RoutedEventArgs e)
+        {
+            RSSrepo rssRepo = new RSSrepo();
+
+        }
+
+        private void BtnSaveSelected_Click(object sender, RoutedEventArgs e)
+        {
+            RSSrepo rssRepo = new RSSrepo();
+
+        }
+
+        private void SelectedArticleDetails()
+        {
+            _news = new News();
+            _news.Date = TxbDate.Text;
+            _news.Description = TxbDescription.Text;
+            _news.Title = TxbTitle.Text;
+
+
+        }
+
+        private void ParseArticleID()
+        {
+
         }
     }
 
