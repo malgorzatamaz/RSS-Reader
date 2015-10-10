@@ -10,7 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using HtmlAgilityPack;
 using MahApps.Metro.Controls;
-using RSS_Reader.Models;
+using RSS_Reader.ViewModel;
+using RSS_Reader.ViewModel.Dto;
 
 namespace RSS_Reader
 {
@@ -26,6 +27,7 @@ namespace RSS_Reader
             InitializeComponent();
             Categories = GetCategories();
             CbxCategory.DataContext = Categories;
+            DataContext = new MainWindowViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -38,6 +40,7 @@ namespace RSS_Reader
             HttpUtility.HtmlDecode(entry.Description, myWriter);
             string decode = myWriter.ToString(); // potrzebny nam tekst mamy w <p>...</p>         
         }
+
         private List<Category> GetCategories()
         {
             List<Category> list = new List<Category>();
@@ -69,7 +72,7 @@ namespace RSS_Reader
         private void CbxCategory_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var provider = (XmlDataProvider)this.Resources["rssData"];
-            provider.Source = new Uri(Categories[CbxCategory.SelectedIndex].Url);
+            //provider.Source = new Uri(Categories[CbxCategory.SelectedIndex].Url);
         }
     }
 
