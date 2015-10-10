@@ -79,12 +79,14 @@
                        Margin="3"
                        Opacity="0.72"
                        Text="{Binding News.Date}" />
-            <TextBlock Name="TxbDescription"
-                       Height="170"
-                       Margin="3"
-                       FontStyle="Italic"
-                       Text="{Binding News.Description}"
-                       TextWrapping="Wrap" />
+            <ScrollViewer Height="100" VerticalScrollBarVisibility="Auto">
+                <TextBlock Name="TxbDescription"
+                           Margin="3"
+                           FontStyle="Italic"
+                           Text="{Binding News.Description}"
+                           TextWrapping="Wrap" />
+            </ScrollViewer>
+
         </StackPanel>
 
     </Grid>
