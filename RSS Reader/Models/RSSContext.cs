@@ -10,7 +10,7 @@ namespace RSS_Reader.Models
     public class RSSContext : DbContext
     {
         public DbSet<News> News { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        
         public RSSContext()
         {
             Database.SetInitializer<RSSContext>(new CreateDatabaseIfNotExists<RSSContext>());
