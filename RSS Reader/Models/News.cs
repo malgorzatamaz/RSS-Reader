@@ -16,6 +16,6 @@ namespace RSS_Reader.Models
         public string Description { get; set; }
         public string CategoryName { get; set; }
         public byte[] Photo { get; set; }
-       // public BitmapImage Photo { get; set; }
+       
     }
 }
