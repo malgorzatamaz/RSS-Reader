@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Dto\RSSContext.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Reader.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
@@ -98,9 +99,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\News.cs" />
-    <Compile Include="Models\RSSContext.cs" />
     <Compile Include="ViewModel\Dto\Category.cs" />
     <Compile Include="ViewModel\Dto\News.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

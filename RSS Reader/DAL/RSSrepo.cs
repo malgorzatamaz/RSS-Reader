@@ -1,4 +1,4 @@
-﻿using RSS_Reader.Models;
+﻿using RSS_Reader.ViewModel.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +15,18 @@ namespace RSS_Reader.DAL
         {
             _rssContext.News.Add(new News
                 {
-                    CategoryName = news.CategoryName,
+                    Category = "cat",
                     Date = news.Date,
                     Description = news.Description,
                     Photo = news.Photo,
                     Title = news.Title,
-                    Url = news.Url
+                    LinkNews = news.LinkNews,
+                    LinkImage = news.LinkImage,
+                    Id = news.Id
+                    
                 });
 
             _rssContext.SaveChanges();
-        }
-
-        public void AddAllAnews()
-        {
-            throw new NotImplementedException();
         }
 
         public void DeleteSelectedArticle(News news)

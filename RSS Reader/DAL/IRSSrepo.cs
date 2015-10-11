@@ -1,4 +1,4 @@
-﻿using RSS_Reader.Models;
+﻿using RSS_Reader.ViewModel.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,6 @@ namespace RSS_Reader.DAL
     interface IRSSrepo
     {
         void AddSelectedArticle(News news);
-        void AddAllAnews();
         void DeleteSelectedArticle(News news);
         
     }

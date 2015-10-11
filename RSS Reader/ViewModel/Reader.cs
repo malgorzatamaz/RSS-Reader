@@ -85,12 +85,12 @@ namespace RSS_Reader.ViewModel
             }
         }
 
-        private void ParseId(News news)
+        public void ParseId(News news)
         {
             string ipLong = news.Id;
             string searchId = ",nId,";
             int index = ipLong.IndexOf(searchId);
-            if (index > -1 && ipLong.Length > index + searchId.Length + 7)
+            if (index > -1 && ipLong.Length > index + searchId.Length + 7) //?
                 news.Id = ipLong.Substring(index + searchId.Length, 7);
             else
                 news.Id = string.Empty;
@@ -100,5 +100,8 @@ namespace RSS_Reader.ViewModel
         {
 
         }
+
+  
+
     }
 }
