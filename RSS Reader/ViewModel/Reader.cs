@@ -51,12 +51,16 @@ namespace RSS_Reader.ViewModel
         {
             StringWriter myWriter = new StringWriter();
             string description = string.Empty;
+            string start = ResourceRss.StartDescription;
             HttpUtility.HtmlDecode(news.Description, myWriter);
             string decode = myWriter.ToString();
-            int index = decode.IndexOf(ResourceRss.StartDescription);
+            if (news.UrlImage == null)
+                start = ResourceRss.StartDescriptionWithoutImage;
+            
+            int index = decode.IndexOf(start);
             if (index > -1)
             {
-                for (int i = index + ResourceRss.StartDescription.Length; i < decode.Length; i++)
+                for (int i = index + start.Length; i < decode.Length; i++)
                 {
                     if (i + ResourceRss.EndDescription.Length < decode.Length)
                     {

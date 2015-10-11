@@ -97,6 +97,15 @@ namespace RSS_Reader {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;.
+        /// </summary>
+        public static string StartDescriptionWithoutImage {
+            get {
+                return ResourceManager.GetString("StartDescriptionWithoutImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://rss.interia.pl/.
         /// </summary>
         public static string UrlWebsite {

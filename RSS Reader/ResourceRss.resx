@@ -129,6 +129,9 @@
   <data name="StartDescription" xml:space="preserve">
     <value>&lt;/a&gt;</value>
   </data>
+  <data name="StartDescriptionWithoutImage" xml:space="preserve">
+    <value>&lt;p&gt;</value>
+  </data>
   <data name="UrlWebsite" xml:space="preserve">
     <value>http://rss.interia.pl/</value>
   </data>
