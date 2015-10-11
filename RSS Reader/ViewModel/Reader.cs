@@ -56,17 +56,15 @@ namespace RSS_Reader.ViewModel
             string description = string.Empty;
             HttpUtility.HtmlDecode(news.Description, myWriter);
             string decode = myWriter.ToString();
-            string searchId = "</a>";
-            string end = "</p>";
-            int index = decode.IndexOf(searchId);
+            int index = decode.IndexOf(ResourceRss.StartDescription);
             if (index > -1)
             {
-                for (int i = index + searchId.Length; i < decode.Length; i++)
+                for (int i = index + ResourceRss.StartDescription.Length; i < decode.Length; i++)
                 {
-                    if (i + end.Length < decode.Length)
+                    if (i + ResourceRss.EndDescription.Length < decode.Length)
                     {
-                        string tmp = decode.Substring(i, end.Length);
-                        if (tmp != end)
+                        string tmp = decode.Substring(i, ResourceRss.EndDescription.Length);
+                        if (tmp != ResourceRss.EndDescription)
                             description += decode[i];
                         else
                         {
@@ -88,10 +86,9 @@ namespace RSS_Reader.ViewModel
         private void ParseId(News news)
         {
             string ipLong = news.Id;
-            string searchId = ",nId,";
-            int index = ipLong.IndexOf(searchId);
-            if (index > -1 && ipLong.Length > index + searchId.Length + 7)
-                news.Id = ipLong.Substring(index + searchId.Length, 7);
+            int index = ipLong.IndexOf(ResourceRss.SearchId);
+            if (index > -1 && ipLong.Length > index + ResourceRss.SearchId.Length + Convert.ToInt32(ResourceRss.LengthId))
+                news.Id = ipLong.Substring(index + ResourceRss.SearchId.Length, Convert.ToInt32(ResourceRss.LengthId));
             else
                 news.Id = string.Empty;
         }
