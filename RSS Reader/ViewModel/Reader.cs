@@ -69,14 +69,7 @@ namespace RSS_Reader.ViewModel
                             description += decode[i];
                         else
                         {
-                            if (description[0] == '-')
-                            {
-                                news.Description = description.Substring(1);
-                            }
-                            else
-                            {
-                                news.Description = description;
-                            }
+                            news.Description = description[0] == '-' ? description.Substring(1) : description;
                             return;
                         }
                     }

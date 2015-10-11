@@ -6,7 +6,7 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       Name="MainMetroWindow"
                       Title="RSS Reader"
-                      Width="718.5"
+                      Width="720.597"
                       Height="600"
                       MinWidth="740"
                       MinHeight="580"
@@ -16,93 +16,192 @@
                       WindowStartupLocation="CenterScreen"
                       mc:Ignorable="d">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="60*" />
-            <RowDefinition Height="40*" />
-        </Grid.RowDefinitions>
+        <controls:MetroAnimatedSingleRowTabControl x:Name="AnimatedTabControl"
+                                                   Width="680"
+                                                   Height="536"
+                                                   Margin="23,5,23,5"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Style="{Binding StringFormat=TabPanel}">
+            <TabControl.Resources>
+                <Style TargetType="TabPanel">
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="{DynamicResource TabItemFontSize}" />
+                </Style>
+            </TabControl.Resources>
+            <TabItem Width="120" Header="Nowe">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="60*" />
+                        <RowDefinition Height="40*" />
+                    </Grid.RowDefinitions>
 
-        <ComboBox Name="CbxCategory"
-                  Grid.Row="0"
-                  Width="250"
-                  Height="30"
-                  Margin="5"
-                  HorizontalAlignment="Left"
-                  BorderBrush="Black"
-                  BorderThickness="2"
-                  DisplayMemberPath="Name"
-                  ItemsSource="{Binding ListCategories}"
-                  SelectedIndex="{Binding SelectedIndexCategories,
-                                          Mode=TwoWay,
-                                          UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="0"
-                Width="230"
-                Height="30"
-                Margin="260,5,5,5"
-                HorizontalAlignment="Left"
-                Command="{Binding SaveAllCommand}"
-                Style="{DynamicResource SquareButtonStyle}">
-            Zapisz wszystkie w kategorii
-        </Button>
-        <Button Grid.Row="0"
-                Width="230"
-                Height="30"
-                Margin="495,5,5,5"
-                HorizontalAlignment="Left"
-                Command="{Binding SaveCommand}"
-                Style="{DynamicResource SquareButtonStyle}">
-            Zapisz wybrany
-        </Button>
-        <ListBox x:Name="rssItems"
-                 Grid.Row="1"
-                 Margin="5"
-                 BorderThickness="1"
-                 ItemsSource="{Binding LineNews}"
-                 SelectedIndex="{Binding SelectedIndexListBoxNews,
-                                         Mode=TwoWay,
-                                         UpdateSourceTrigger=PropertyChanged}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Width="50"
-                               Margin="5"
-                               Source="{Binding UrlImage}" />
+                    <ComboBox Name="CbxCategory"
+                              Grid.Row="0"
+                              Width="200"
+                              Height="30"
+                              Margin="5"
+                              HorizontalAlignment="Left"
+                              BorderBrush="Black"
+                              BorderThickness="2"
+                              DisplayMemberPath="Name"
+                              ItemsSource="{Binding ListCategories}"
+                              SelectedIndex="{Binding SelectedIndexCategories,
+                                                      Mode=TwoWay,
+                                                      UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Grid.Row="0"
+                            Width="200"
+                            Height="30"
+                            Margin="237,5,5,5"
+                            HorizontalAlignment="Left"
+                            Command="{Binding SaveAllCommand}"
+                            Style="{DynamicResource SquareButtonStyle}">
+                        Zapisz wszystkie w kategorii
+                    </Button>
+                    <Button Grid.Row="0"
+                            Width="200"
+                            Height="30"
+                            Margin="470,5,0,5"
+                            HorizontalAlignment="Left"
+                            Command="{Binding SaveCommand}"
+                            Style="{DynamicResource SquareButtonStyle}">
+                        Zapisz wybrany
+                    </Button>
+                    <ListBox x:Name="rssItems"
+                             Grid.Row="1"
+                             Margin="5"
+                             BorderThickness="1"
+                             ItemsSource="{Binding LineNews}"
+                             SelectedIndex="{Binding SelectedIndexListBoxNews,
+                                                     Mode=TwoWay,
+                                                     UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Width="50"
+                                           Margin="5"
+                                           Source="{Binding UrlImage}" />
+                                    <TextBlock Name="TxbTitle"
+                                               Margin="5"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Bold"
+                                               Text="{Binding Title}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Row="2"
+                                Margin="10,3,3,0"
+                                Orientation="Vertical">
                         <TextBlock Name="TxbTitle"
-                                   Margin="5"
-                                   VerticalAlignment="Center"
+                                   FontSize="13"
                                    FontWeight="Bold"
-                                   Text="{Binding Title}" />
+                                   Text="{Binding News.Title}" />
+                        <TextBlock Name="TxbDate"
+                                   Opacity="0.72"
+                                   Text="{Binding News.Date}" />
+                        <TextBox Name="TxbDescription"
+                                 MinHeight="15"
+                                 MaxHeight="100"
+                                 Background="{Binding ElementName=MainMetroWindow,
+                                                      Path=Background}"
+                                 BorderThickness="0"
+                                 FontStyle="Italic"
+                                 IsReadOnly="True"
+                                 ScrollViewer.CanContentScroll="True"
+                                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                 Text="{Binding News.Description}"
+                                 TextWrapping="Wrap" />
+                        <TextBlock Margin="0,0,0,0">
+                            <Hyperlink Command="{Binding OpenWebsiteCommand}">
+                                <Run Text="Przejdź na strone" />
+                            </Hyperlink>
+                        </TextBlock>
                     </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <StackPanel Grid.Row="2"
-                    Margin="10,3,3,0"
-                    Orientation="Vertical">
-            <TextBlock Name="TxbTitle"
-                       FontSize="13"
-                       FontWeight="Bold"
-                       Text="{Binding News.Title}" />
-            <TextBlock Name="TxbDate"
-                       Opacity="0.72"
-                       Text="{Binding News.Date}" />
-            <TextBox Name="TxbDescription"
-                     MinHeight="15"
-                     MaxHeight="100"
-                     Background="{Binding ElementName=MainMetroWindow,
-                                          Path=Background}"
-                     BorderThickness="0"
-                     FontStyle="Italic"
-                     IsReadOnly="True"
-                     ScrollViewer.CanContentScroll="True"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible"
-                     Text="{Binding News.Description}"
-                     TextWrapping="Wrap" />
-            <TextBlock Margin="0,0,0,0">
-                <Hyperlink Command="{Binding OpenWebsiteCommand}">
-                    <Run Text="Przejdź na strone" />
-                </Hyperlink>
-            </TextBlock>
-        </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Width="150" Header="Archiwalne">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="60*" />
+                        <RowDefinition Height="40*" />
+                    </Grid.RowDefinitions>
+
+                    <ComboBox Grid.Row="0"
+                              Width="200"
+                              Height="30"
+                              Margin="5"
+                              HorizontalAlignment="Left"
+                              BorderBrush="Black"
+                              BorderThickness="2"
+                              DisplayMemberPath="Name"
+                              ItemsSource="{Binding ListCategories}"
+                              SelectedIndex="{Binding SelectedIndexCategories,
+                                                      Mode=TwoWay,
+                                                      UpdateSourceTrigger=PropertyChanged}" />
+
+                    <ListBox Grid.Row="1"
+                             Margin="5"
+                             BorderThickness="1"
+                             ItemsSource="{Binding LineNews}"
+                             SelectedIndex="{Binding SelectedIndexListBoxNews,
+                                                     Mode=TwoWay,
+                                                     UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Image Width="50"
+                                           Margin="5"
+                                           Source="{Binding UrlImage}" />
+                                    <TextBlock Name="TxbTitle"
+                                               Margin="5"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Bold"
+                                               Text="{Binding Title}" />
+
+                                    <Button Width="30"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            Command="{Binding DeleteCommand}"
+                                            Content="X"
+                                            FontFamily="Verdana"
+                                            FontSize="12"
+                                            FontWeight="Bold"
+                                            Foreground="Black"
+                                            Style="{StaticResource BorderlessButton}"
+                                            ToolTip="Usunąć wiadomość" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Row="2"
+                                Margin="10,3,3,0"
+                                Orientation="Vertical">
+                        <TextBlock FontSize="13"
+                                   FontWeight="Bold"
+                                   Text="{Binding News.Title}" />
+                        <TextBlock Opacity="0.72" Text="{Binding News.Date}" />
+                        <TextBox MinHeight="15"
+                                 MaxHeight="100"
+                                 Background="{Binding ElementName=MainMetroWindow,
+                                                      Path=Background}"
+                                 BorderThickness="0"
+                                 FontStyle="Italic"
+                                 IsReadOnly="True"
+                                 ScrollViewer.CanContentScroll="True"
+                                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                 Text="{Binding News.Description}"
+                                 TextWrapping="Wrap" />
+                        <TextBlock Margin="0,0,0,0">
+                            <Hyperlink Command="{Binding OpenWebsiteCommand}">
+                                <Run Text="Przejdź na strone" />
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </controls:MetroAnimatedSingleRowTabControl>
     </Grid>
 </controls:MetroWindow>
