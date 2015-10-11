@@ -7,6 +7,8 @@ using System.Windows.Input;
 using HtmlAgilityPack;
 using PropertyChanged;
 using RSS_Reader.ViewModel.Dto;
+using RSS_Reader.DAL;
+
 
 namespace RSS_Reader.ViewModel
 {
@@ -78,8 +80,10 @@ namespace RSS_Reader.ViewModel
             newsSave.Category = LineNews[index].Category;
             newsSave.UrlNews = LineNews[index].UrlNews;
             newsSave.Date = LineNews[index].Date;
-    
-            // wywolanie metody zapisu do bazy
+            newsSave.Photo = GetImageAsByte(newsSave.UrlImage);
+
+            RSSrepo rssRepo = new RSSrepo();
+            rssRepo.AddSelectedArticle(newsSave);
         }
 
         private void SaveAll(object obj)
@@ -119,9 +123,9 @@ namespace RSS_Reader.ViewModel
             string page = webClient.DownloadString(ResourceRss.UrlWebsite);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(page);
-
             var titles = from node in doc.DocumentNode.SelectNodes("//td[@class = 'tdPolecane01']")
                          select node.InnerText.ToString();
+
 
             listTitles = titles.AsQueryable().ToList();
 
@@ -135,6 +139,20 @@ namespace RSS_Reader.ViewModel
                 ListCategories.Add(new Category { Name = listTitles[i], Url = listUrls[i] });
             }
 
+        }
+
+        private byte[] GetImageAsByte(string LinkImage)
+        {
+            if (!string.IsNullOrWhiteSpace(LinkImage))
+            {
+                WebClient webClient = new WebClient();
+                return News.Photo = webClient.DownloadData(LinkImage);
+            }
+            else
+            {
+                byte[] c = new byte[] { 0 };
+                return c;
+            }
         }
     }
 }

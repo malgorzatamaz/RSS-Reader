@@ -77,7 +77,7 @@ namespace RSS_Reader.ViewModel
             }
         }
 
-        private void ParseId(News news)
+        public void ParseId(News news)
         {
             string ipLong = news.Id;
             int index = ipLong.IndexOf(ResourceRss.SearchId);
@@ -91,5 +91,8 @@ namespace RSS_Reader.ViewModel
         {
 
         }
+
+  
+
     }
 }

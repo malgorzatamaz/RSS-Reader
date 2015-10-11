@@ -1,5 +1,8 @@
 ﻿using MahApps.Metro.Controls;
+
 using RSS_Reader.ViewModel;
+using System;
+
 
 namespace RSS_Reader
 {
@@ -10,10 +13,12 @@ namespace RSS_Reader
     {
         public MainWindow()
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDirectory);
             InitializeComponent();
             DataContext = new MainWindowViewModel();
         }
+
     }
 
-   
+
 }
