@@ -16,7 +16,6 @@ namespace RSS_Reader.ViewModel
     {
         private int _selectedIndexListBoxNews;
         private int _selectedIndexCategories;
-        private bool _isSelectedListBox;
         private int _selectedIndexTab;
         public ObservableCollection<News> LineNews { get; set; }
         public ObservableCollection<Category> ListCategories { get; set; }
@@ -29,17 +28,8 @@ namespace RSS_Reader.ViewModel
             set
             {
                 _selectedIndexTab = value;
+                SelectedIndexCategories = 0;
                 ReadNews();
-            }
-        }
-
-        public bool IsSelectedListBox
-        {
-            get { return _isSelectedListBox; }
-            set
-            {
-                _isSelectedListBox = value;
-
             }
         }
 
@@ -64,15 +54,9 @@ namespace RSS_Reader.ViewModel
             News = new News();
             SelectedIndexListBoxNews = 0;
             if (SelectedIndexTab == 0)
-            {
                 Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories]);
-            }
             else
-            {
-                SelectedIndexCategories = 0;
                 Reader.ReadBase(LineNews, ListCategories[SelectedIndexCategories]);
-
-            }
             ShowDescription();
         }
 
@@ -102,7 +86,9 @@ namespace RSS_Reader.ViewModel
 
         private void Delete(object obj)
         {
-            int index = SelectedIndexListBoxNews;
+            LineNews.RemoveAt(SelectedIndexListBoxNews);
+
+            // metoda usuwania z bazy by ID nowosci
         }
 
         private void Save(object obj)
