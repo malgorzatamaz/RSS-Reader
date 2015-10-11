@@ -17,6 +17,7 @@
                       mc:Ignorable="d">
     <Grid>
         <controls:MetroAnimatedSingleRowTabControl x:Name="AnimatedTabControl"
+                                                  SelectedIndex="{Binding SelectedIndexTab, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                    Width="680"
                                                    Height="536"
                                                    Margin="23,5,23,5"
@@ -145,11 +146,24 @@
                     <ListBox Grid.Row="1"
                              Margin="5"
                              BorderThickness="1"
+                             IsSelected="{Binding  IsSelectedListBox,
+                                                  Mode=TwoWay,
+                                                  UpdateSourceTrigger=PropertyChanged}"
                              ItemsSource="{Binding LineNews}"
                              SelectedIndex="{Binding SelectedIndexListBoxNews,
                                                      Mode=TwoWay,
                                                      UpdateSourceTrigger=PropertyChanged}"
-                             Style="{Binding MetroListBox}">
+                            
+                            >
+                        <ListBox.Resources>
+                            <Style BasedOn="{StaticResource {x:Type ListBoxItem}}" TargetType="ListBoxItem">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
+                                        <Setter Property="IsSelected" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel DataContext="{TemplateBinding DataContext}">

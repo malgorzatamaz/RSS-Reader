@@ -16,10 +16,33 @@ namespace RSS_Reader.ViewModel
     {
         private int _selectedIndexListBoxNews;
         private int _selectedIndexCategories;
+        private bool _isSelectedListBox;
+        private int _selectedIndexTab;
         public ObservableCollection<News> LineNews { get; set; }
         public ObservableCollection<Category> ListCategories { get; set; }
         public News News { get; set; }
         public Reader Reader { get; set; }
+
+        public int SelectedIndexTab
+        {
+            get { return _selectedIndexTab; }
+            set
+            {
+                _selectedIndexTab = value;
+                ReadNews();
+            }
+        }
+
+        public bool IsSelectedListBox
+        {
+            get { return _isSelectedListBox; }
+            set
+            {
+                _isSelectedListBox = value; 
+                
+            }
+        }
+
         public ICommand OpenWebsiteCommand { get; set; }
         public ICommand SaveAllCommand { get; set; }
         public ICommand SaveCommand { get; set; }
@@ -37,10 +60,22 @@ namespace RSS_Reader.ViewModel
 
         private void ReadNews()
         {
-            LineNews = new ObservableCollection<News>();
-            Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories]);
-            SelectedIndexListBoxNews = 0;
-            ShowDescription();
+            if (SelectedIndexTab == 0)
+            {
+                LineNews = new ObservableCollection<News>();
+                Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories]);
+                SelectedIndexListBoxNews = 0;
+                ShowDescription();
+            }
+            else
+            {
+                SelectedIndexListBoxNews = 0;
+                SelectedIndexCategories = 0;
+                LineNews = new ObservableCollection<News>();
+                Reader.ReadBase(LineNews, ListCategories[SelectedIndexCategories]);
+                ShowDescription();
+            }
+           
         }
 
         public int SelectedIndexListBoxNews
@@ -63,7 +98,7 @@ namespace RSS_Reader.ViewModel
             SaveCommand = new RelayCommand(Save, (m) => true);
             DeleteCommand = new RelayCommand(Delete, (m) => true);
             GetCategories();
-
+            SelectedIndexTab = 0;
             SelectedIndexCategories = 0;
             ReadNews();        
         }
