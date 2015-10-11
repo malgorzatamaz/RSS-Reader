@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
@@ -19,6 +20,8 @@ namespace RSS_Reader.ViewModel
         public News News { get; set; }
         public Reader Reader { get; set; }
         public ICommand OpenWebsiteCommand { get; set; }
+        public ICommand SaveAllCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
 
         public int SelectedIndexCategories
         {
@@ -33,7 +36,7 @@ namespace RSS_Reader.ViewModel
         private void ReadNews()
         {
             LineNews = new ObservableCollection<News>();
-            Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories].Url);
+            Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories]);
             SelectedIndexListBoxNews = 0;
             ShowDescription();
         }
@@ -54,10 +57,37 @@ namespace RSS_Reader.ViewModel
             News = new News();
             Reader = new Reader();
             OpenWebsiteCommand = new RelayCommand(OpenWebsite, (m) => true);
+            SaveAllCommand = new RelayCommand(SaveAll, (m) => true);
+            SaveCommand = new RelayCommand(Save, (m) => true);
             GetCategories();
 
             SelectedIndexCategories = 0;
             ReadNews();        
+        }
+
+        private void Save(object obj)
+        {
+            News newsSave=new News();
+            int index = SelectedIndexListBoxNews;
+            if (obj is Int32)
+                index = (int)obj;
+            newsSave.Title = LineNews[index].Title;
+            newsSave.Description = LineNews[index].Description;
+            newsSave.Id = LineNews[index].Id;
+            newsSave.UrlImage = LineNews[index].UrlImage;
+            newsSave.Category = LineNews[index].Category;
+            newsSave.UrlNews = LineNews[index].UrlNews;
+            newsSave.Date = LineNews[index].Date;
+    
+            // wywolanie metody zapisu do bazy
+        }
+
+        private void SaveAll(object obj)
+        {
+            for (int i = 0; i < LineNews.Count; i++)
+            {
+                Save(i);
+            }         
         }
 
         private void OpenWebsite(object obj)

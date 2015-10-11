@@ -13,11 +13,11 @@ namespace RSS_Reader.ViewModel
 {
     public class Reader
     {
-        public void ParseXml(ObservableCollection<News> lineNews, string url)
+        public void ParseXml(ObservableCollection<News> lineNews, Category category)
         {
             try
             {
-                using (XmlReader reader = XmlReader.Create(url))
+                using (XmlReader reader = XmlReader.Create(category.Url))
                 {
                     var formatter = new Rss20FeedFormatter();
                     formatter.ReadFrom(reader);
@@ -29,15 +29,13 @@ namespace RSS_Reader.ViewModel
                             Date = item.PublishDate.DateTime.ToString(),
                             UrlNews = item.Links.First().Uri.ToString(),
                             Description = item.Summary.Text,
+                            Category = category.Name,
                             Id = item.Id
                         });
 
                         if (item.Links.Count > 1 && item.Links.Any(n => n.Uri.ToString().Contains(".jpg")))
                             lineNews.Last().UrlImage = item.Links[1].Uri.ToString();
-                        foreach (var category in item.Categories)
-                        {
-                            lineNews.Last().Category = category.Name;
-                        }
+                        
                         ParseId(lineNews.Last());
                         ParseDescription(lineNews.Last());
                     }

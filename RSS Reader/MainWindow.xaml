@@ -40,6 +40,7 @@
                 Height="30"
                 Margin="260,5,5,5"
                 HorizontalAlignment="Left"
+                Command="{Binding SaveAllCommand}"
                 Style="{DynamicResource SquareButtonStyle}">
             Zapisz wszystkie w kategorii
         </Button>
@@ -48,6 +49,7 @@
                 Height="30"
                 Margin="495,5,5,5"
                 HorizontalAlignment="Left"
+                Command="{Binding SaveCommand}"
                 Style="{DynamicResource SquareButtonStyle}">
             Zapisz wybrany
         </Button>
