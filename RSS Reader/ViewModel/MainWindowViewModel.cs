@@ -35,7 +35,6 @@ namespace RSS_Reader.ViewModel
             LineNews = new ObservableCollection<News>();
             Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories].Url);
             SelectedIndexListBoxNews = 0;
-           
             ShowDescription();
         }
 
