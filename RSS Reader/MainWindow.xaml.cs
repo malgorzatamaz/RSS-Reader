@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using MahApps.Metro.Controls;
+﻿using MahApps.Metro.Controls;
 using RSS_Reader.ViewModel;
 using System;
 

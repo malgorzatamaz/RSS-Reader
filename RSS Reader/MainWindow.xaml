@@ -17,12 +17,14 @@
                       mc:Ignorable="d">
     <Grid>
         <controls:MetroAnimatedSingleRowTabControl x:Name="AnimatedTabControl"
-                                                  SelectedIndex="{Binding SelectedIndexTab, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                    Width="680"
                                                    Height="536"
                                                    Margin="23,5,23,5"
                                                    HorizontalAlignment="Center"
                                                    VerticalAlignment="Center"
+                                                   SelectedIndex="{Binding SelectedIndexTab,
+                                                                           Mode=TwoWay,
+                                                                           UpdateSourceTrigger=PropertyChanged}"
                                                    Style="{Binding StringFormat=TabPanel}">
             <TabControl.Resources>
                 <Style TargetType="TabPanel">
@@ -81,6 +83,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Image Width="50"
+                                           MinHeight="40"
                                            Margin="5"
                                            Source="{Binding UrlImage}" />
                                     <TextBlock Name="TxbTitle"
@@ -146,15 +149,10 @@
                     <ListBox Grid.Row="1"
                              Margin="5"
                              BorderThickness="1"
-                             IsSelected="{Binding  IsSelectedListBox,
-                                                  Mode=TwoWay,
-                                                  UpdateSourceTrigger=PropertyChanged}"
                              ItemsSource="{Binding LineNews}"
                              SelectedIndex="{Binding SelectedIndexListBoxNews,
                                                      Mode=TwoWay,
-                                                     UpdateSourceTrigger=PropertyChanged}"
-                            
-                            >
+                                                     UpdateSourceTrigger=PropertyChanged}">
                         <ListBox.Resources>
                             <Style BasedOn="{StaticResource {x:Type ListBoxItem}}" TargetType="ListBoxItem">
                                 <Style.Triggers>
@@ -168,6 +166,7 @@
                             <DataTemplate>
                                 <DockPanel DataContext="{TemplateBinding DataContext}">
                                     <Image Width="50"
+                                           MinHeight="40"
                                            Margin="5"
                                            Source="{Binding UrlImage}" />
                                     <TextBlock Name="TxbTitle"
@@ -189,7 +188,7 @@
                                             FontWeight="Bold"
                                             Foreground="Black"
                                             Style="{StaticResource BorderlessButton}"
-                                            ToolTip="Usunąć wiadomość" />
+                                            ToolTip="Usunąć nowość" />
                                 </DockPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

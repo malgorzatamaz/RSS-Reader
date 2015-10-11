@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Windows.Input;
 using HtmlAgilityPack;
-
 using PropertyChanged;
 using RSS_Reader.ViewModel.Dto;
 using RSS_Reader.DAL;
@@ -18,7 +17,6 @@ namespace RSS_Reader.ViewModel
     {
         private int _selectedIndexListBoxNews;
         private int _selectedIndexCategories;
-        private bool _isSelectedListBox;
         private int _selectedIndexTab;
         public ObservableCollection<News> LineNews { get; set; }
         public ObservableCollection<Category> ListCategories { get; set; }
@@ -32,17 +30,8 @@ namespace RSS_Reader.ViewModel
             set
             {
                 _selectedIndexTab = value;
+                SelectedIndexCategories = 0;
                 ReadNews();
-            }
-        }
-
-        public bool IsSelectedListBox
-        {
-            get { return _isSelectedListBox; }
-            set
-            {
-                _isSelectedListBox = value; 
-                
             }
         }
 
@@ -54,8 +43,8 @@ namespace RSS_Reader.ViewModel
         public int SelectedIndexCategories
         {
             get { return _selectedIndexCategories; }
-            set 
-            { 
+            set
+            {
                 _selectedIndexCategories = value;
                 ReadNews();
             }
@@ -63,22 +52,14 @@ namespace RSS_Reader.ViewModel
 
         private void ReadNews()
         {
+            LineNews = new ObservableCollection<News>();
+            News = new News();
+            SelectedIndexListBoxNews = 0;
             if (SelectedIndexTab == 0)
-            {
-                LineNews = new ObservableCollection<News>();
                 Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories]);
-                SelectedIndexListBoxNews = 0;
-                ShowDescription();
-            }
             else
-            {
-                SelectedIndexListBoxNews = 0;
-                SelectedIndexCategories = 0;
-                LineNews = new ObservableCollection<News>();
                 Reader.ReadBase(LineNews, ListCategories[SelectedIndexCategories]);
-                ShowDescription();
-            }
-           
+            ShowDescription();
         }
 
         public int SelectedIndexListBoxNews
@@ -94,7 +75,6 @@ namespace RSS_Reader.ViewModel
         public MainWindowViewModel()
         {
             ListCategories = new ObservableCollection<Category>();
-            News = new News();
             Reader = new Reader();
             OpenWebsiteCommand = new RelayCommand(OpenWebsite, (m) => true);
             SaveAllCommand = new RelayCommand(SaveAll, (m) => true);
@@ -103,17 +83,19 @@ namespace RSS_Reader.ViewModel
             GetCategories();
             SelectedIndexTab = 0;
             SelectedIndexCategories = 0;
-            ReadNews();        
+            ReadNews();
         }
 
         private void Delete(object obj)
         {
-            int index = SelectedIndexListBoxNews;
+            LineNews.RemoveAt(SelectedIndexListBoxNews);
+
+            // metoda usuwania z bazy by ID nowosci
         }
 
         private void Save(object obj)
         {
-            News newsSave=new News();
+            News newsSave = new News();
             int index = SelectedIndexListBoxNews;
             if (obj is Int32)
                 index = (int)obj;
@@ -135,27 +117,28 @@ namespace RSS_Reader.ViewModel
             for (int i = 0; i < LineNews.Count; i++)
             {
                 Save(i);
-            }         
+            }
         }
 
         private void OpenWebsite(object obj)
         {
-            if (string.IsNullOrEmpty(LineNews[SelectedIndexListBoxNews].UrlNews) == false)
-            {
-                System.Diagnostics.Process.Start(LineNews[SelectedIndexListBoxNews].UrlNews);
-            }
+            if (LineNews.Any())
+                if (string.IsNullOrEmpty(LineNews[SelectedIndexListBoxNews].UrlNews) == false)
+                {
+                    System.Diagnostics.Process.Start(LineNews[SelectedIndexListBoxNews].UrlNews);
+                }
         }
 
         private void ShowDescription()
         {
-            if (LineNews.Count > 0 && SelectedIndexListBoxNews>-1)
+            if (LineNews.Count > 0 && SelectedIndexListBoxNews > -1)
             {
                 News.Title = LineNews[SelectedIndexListBoxNews].Title;
                 News.Date = LineNews[SelectedIndexListBoxNews].Date;
                 News.Description = LineNews[SelectedIndexListBoxNews].Description;
                 News.UrlNews = LineNews[SelectedIndexListBoxNews].UrlNews;
             }
-            
+
         }
 
         private void GetCategories()
@@ -182,7 +165,6 @@ namespace RSS_Reader.ViewModel
             {
                 ListCategories.Add(new Category { Name = listTitles[i], Url = listUrls[i] });
             }
-
         }
 
         private byte[] GetImageAsByte(string LinkImage)
