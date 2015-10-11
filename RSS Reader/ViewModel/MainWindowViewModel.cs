@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Windows.Input;
 using HtmlAgilityPack;
-
 using PropertyChanged;
 using RSS_Reader.ViewModel.Dto;
 
@@ -161,7 +160,6 @@ namespace RSS_Reader.ViewModel
             {
                 ListCategories.Add(new Category { Name = listTitles[i], Url = listUrls[i] });
             }
-
         }
     }
 }

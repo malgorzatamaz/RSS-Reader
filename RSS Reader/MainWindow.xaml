@@ -83,6 +83,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Image Width="50"
+                                           MinHeight="40"
                                            Margin="5"
                                            Source="{Binding UrlImage}" />
                                     <TextBlock Name="TxbTitle"
@@ -165,6 +166,7 @@
                             <DataTemplate>
                                 <DockPanel DataContext="{TemplateBinding DataContext}">
                                     <Image Width="50"
+                                           MinHeight="40"
                                            Margin="5"
                                            Source="{Binding UrlImage}" />
                                     <TextBlock Name="TxbTitle"
