@@ -1,6 +1,7 @@
 ﻿using RSS_Reader.ViewModel.Dto;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,9 +28,7 @@ namespace RSS_Reader.DAL
                        UrlImage = news.UrlImage,
                        Id = news.Id
                    });
-
             }
-
             _rssContext.SaveChanges();
         }
 
@@ -41,5 +40,8 @@ namespace RSS_Reader.DAL
                 _rssContext.SaveChanges();
             }
         }
+
+        public void GetSavedNews(string category)
+        { }
     }
 }

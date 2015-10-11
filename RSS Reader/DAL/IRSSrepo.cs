@@ -11,6 +11,6 @@ namespace RSS_Reader.DAL
     {
         void AddSelectedArticle(News news);
         void DeleteSelectedArticle(string Id);
-        
+        void GetSavedNews(string category);
     }
 }
