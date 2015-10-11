@@ -90,6 +90,7 @@ namespace RSS_Reader.ViewModel
         public void ReadBase(ObservableCollection<News> lineNews, Category category)
         {
             // czytamy z bazy
+            ParseXml(lineNews, category);
         }
     }
 }
