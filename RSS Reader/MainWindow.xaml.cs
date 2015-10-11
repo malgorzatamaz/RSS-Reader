@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using System.Windows;
+using MahApps.Metro.Controls;
 using RSS_Reader.ViewModel;
 
 namespace RSS_Reader
@@ -13,6 +14,8 @@ namespace RSS_Reader
             InitializeComponent();
             DataContext = new MainWindowViewModel();
         }
+
+       
     }
 
    

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Windows.Input;
 using HtmlAgilityPack;
+
 using PropertyChanged;
 using RSS_Reader.ViewModel.Dto;
 
@@ -22,6 +23,7 @@ namespace RSS_Reader.ViewModel
         public ICommand OpenWebsiteCommand { get; set; }
         public ICommand SaveAllCommand { get; set; }
         public ICommand SaveCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         public int SelectedIndexCategories
         {
@@ -59,10 +61,16 @@ namespace RSS_Reader.ViewModel
             OpenWebsiteCommand = new RelayCommand(OpenWebsite, (m) => true);
             SaveAllCommand = new RelayCommand(SaveAll, (m) => true);
             SaveCommand = new RelayCommand(Save, (m) => true);
+            DeleteCommand = new RelayCommand(Delete, (m) => true);
             GetCategories();
 
             SelectedIndexCategories = 0;
             ReadNews();        
+        }
+
+        private void Delete(object obj)
+        {
+            int index = SelectedIndexListBoxNews;
         }
 
         private void Save(object obj)
@@ -100,7 +108,7 @@ namespace RSS_Reader.ViewModel
 
         private void ShowDescription()
         {
-            if (LineNews.Count > 0)
+            if (LineNews.Count > 0 && SelectedIndexListBoxNews>-1)
             {
                 News.Title = LineNews[SelectedIndexListBoxNews].Title;
                 News.Date = LineNews[SelectedIndexListBoxNews].Date;
