@@ -79,15 +79,6 @@ namespace RSS_Reader {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://rss.interia.pl/.
-        /// </summary>
-        public static string LinkWebsite {
-            get {
-                return ResourceManager.GetString("LinkWebsite", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ,nId,.
         /// </summary>
         public static string SearchId {
@@ -102,6 +93,15 @@ namespace RSS_Reader {
         public static string StartDescription {
             get {
                 return ResourceManager.GetString("StartDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://rss.interia.pl/.
+        /// </summary>
+        public static string UrlWebsite {
+            get {
+                return ResourceManager.GetString("UrlWebsite", resourceCulture);
             }
         }
     }

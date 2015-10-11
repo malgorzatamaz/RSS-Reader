@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,11 +13,11 @@ namespace RSS_Reader.ViewModel
 {
     public class Reader
     {
-        public void ParseXml(ObservableCollection<News> lineNews)
+        public void ParseXml(ObservableCollection<News> lineNews, string url)
         {
             try
             {
-                using (XmlReader reader = XmlReader.Create(@"http://interia.pl.feedsportal.com/c/34004/f/618045/index.rss"))
+                using (XmlReader reader = XmlReader.Create(url))
                 {
                     var formatter = new Rss20FeedFormatter();
                     formatter.ReadFrom(reader);
@@ -28,13 +27,13 @@ namespace RSS_Reader.ViewModel
                         {
                             Title = item.Title.Text,
                             Date = item.PublishDate.DateTime.ToString(),
-                            LinkNews = item.Links.First().Uri.ToString(),
+                            UrlNews = item.Links.First().Uri.ToString(),
                             Description = item.Summary.Text,
                             Id = item.Id
                         });
 
                         if (item.Links.Count > 1 && item.Links.Any(n => n.Uri.ToString().Contains(".jpg")))
-                            lineNews.Last().LinkImage = item.Links[1].Uri.ToString();
+                            lineNews.Last().UrlImage = item.Links[1].Uri.ToString();
                         foreach (var category in item.Categories)
                         {
                             lineNews.Last().Category = category.Name;
