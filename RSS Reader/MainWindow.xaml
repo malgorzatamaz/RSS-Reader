@@ -17,6 +17,7 @@
                       mc:Ignorable="d">
     <Grid>
         <controls:MetroAnimatedSingleRowTabControl x:Name="AnimatedTabControl"
+                                                  SelectedIndex="{Binding SelectedIndexTab, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                    Width="680"
                                                    Height="536"
                                                    Margin="23,5,23,5"
@@ -145,13 +146,27 @@
                     <ListBox Grid.Row="1"
                              Margin="5"
                              BorderThickness="1"
+                             IsSelected="{Binding  IsSelectedListBox,
+                                                  Mode=TwoWay,
+                                                  UpdateSourceTrigger=PropertyChanged}"
                              ItemsSource="{Binding LineNews}"
                              SelectedIndex="{Binding SelectedIndexListBoxNews,
                                                      Mode=TwoWay,
-                                                     UpdateSourceTrigger=PropertyChanged}">
+                                                     UpdateSourceTrigger=PropertyChanged}"
+                            
+                            >
+                        <ListBox.Resources>
+                            <Style BasedOn="{StaticResource {x:Type ListBoxItem}}" TargetType="ListBoxItem">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
+                                        <Setter Property="IsSelected" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <DockPanel>
+                                <DockPanel DataContext="{TemplateBinding DataContext}">
                                     <Image Width="50"
                                            Margin="5"
                                            Source="{Binding UrlImage}" />
@@ -164,7 +179,10 @@
                                     <Button Width="30"
                                             Height="20"
                                             HorizontalAlignment="Right"
-                                            Command="{Binding DeleteCommand}"
+                                            Command="{Binding Path=DataContext.DeleteCommand,
+                                                              RelativeSource={RelativeSource FindAncestor,
+                                                                                             AncestorType={x:Type ListBox}}}"
+                                            CommandParameter="{Binding}"
                                             Content="X"
                                             FontFamily="Verdana"
                                             FontSize="12"
@@ -175,6 +193,7 @@
                                 </DockPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+
                     </ListBox>
                     <StackPanel Grid.Row="2"
                                 Margin="10,3,3,0"

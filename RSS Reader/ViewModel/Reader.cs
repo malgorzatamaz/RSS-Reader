@@ -87,9 +87,9 @@ namespace RSS_Reader.ViewModel
                 news.Id = string.Empty;
         }
 
-        public void ReadBase(ObservableCollection<News> lineNews)
+        public void ReadBase(ObservableCollection<News> lineNews, Category category)
         {
-
+            // czytamy z bazy
         }
 
   

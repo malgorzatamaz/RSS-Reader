@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Windows.Input;
 using HtmlAgilityPack;
+
 using PropertyChanged;
 using RSS_Reader.ViewModel.Dto;
 using RSS_Reader.DAL;
@@ -17,13 +18,37 @@ namespace RSS_Reader.ViewModel
     {
         private int _selectedIndexListBoxNews;
         private int _selectedIndexCategories;
+        private bool _isSelectedListBox;
+        private int _selectedIndexTab;
         public ObservableCollection<News> LineNews { get; set; }
         public ObservableCollection<Category> ListCategories { get; set; }
         public News News { get; set; }
         public Reader Reader { get; set; }
+
+        public int SelectedIndexTab
+        {
+            get { return _selectedIndexTab; }
+            set
+            {
+                _selectedIndexTab = value;
+                ReadNews();
+            }
+        }
+
+        public bool IsSelectedListBox
+        {
+            get { return _isSelectedListBox; }
+            set
+            {
+                _isSelectedListBox = value; 
+                
+            }
+        }
+
         public ICommand OpenWebsiteCommand { get; set; }
         public ICommand SaveAllCommand { get; set; }
         public ICommand SaveCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         public int SelectedIndexCategories
         {
@@ -37,10 +62,22 @@ namespace RSS_Reader.ViewModel
 
         private void ReadNews()
         {
-            LineNews = new ObservableCollection<News>();
-            Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories]);
-            SelectedIndexListBoxNews = 0;
-            ShowDescription();
+            if (SelectedIndexTab == 0)
+            {
+                LineNews = new ObservableCollection<News>();
+                Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories]);
+                SelectedIndexListBoxNews = 0;
+                ShowDescription();
+            }
+            else
+            {
+                SelectedIndexListBoxNews = 0;
+                SelectedIndexCategories = 0;
+                LineNews = new ObservableCollection<News>();
+                Reader.ReadBase(LineNews, ListCategories[SelectedIndexCategories]);
+                ShowDescription();
+            }
+           
         }
 
         public int SelectedIndexListBoxNews
@@ -61,10 +98,16 @@ namespace RSS_Reader.ViewModel
             OpenWebsiteCommand = new RelayCommand(OpenWebsite, (m) => true);
             SaveAllCommand = new RelayCommand(SaveAll, (m) => true);
             SaveCommand = new RelayCommand(Save, (m) => true);
+            DeleteCommand = new RelayCommand(Delete, (m) => true);
             GetCategories();
-
+            SelectedIndexTab = 0;
             SelectedIndexCategories = 0;
             ReadNews();        
+        }
+
+        private void Delete(object obj)
+        {
+            int index = SelectedIndexListBoxNews;
         }
 
         private void Save(object obj)
@@ -104,7 +147,7 @@ namespace RSS_Reader.ViewModel
 
         private void ShowDescription()
         {
-            if (LineNews.Count > 0)
+            if (LineNews.Count > 0 && SelectedIndexListBoxNews>-1)
             {
                 News.Title = LineNews[SelectedIndexListBoxNews].Title;
                 News.Date = LineNews[SelectedIndexListBoxNews].Date;
