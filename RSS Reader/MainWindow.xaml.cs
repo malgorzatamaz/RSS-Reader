@@ -30,16 +30,7 @@ namespace RSS_Reader
             DataContext = new MainWindowViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            News entry=new News();
-            entry.Title = TxbTitle.Text;
-            entry.Date = TxbDate.Text;
-            entry.Description = TxbDescription.Text;
-            StringWriter myWriter = new StringWriter();
-            HttpUtility.HtmlDecode(entry.Description, myWriter);
-            string decode = myWriter.ToString(); // potrzebny nam tekst mamy w <p>...</p>         
-        }
+     
 
         private List<Category> GetCategories()
         {

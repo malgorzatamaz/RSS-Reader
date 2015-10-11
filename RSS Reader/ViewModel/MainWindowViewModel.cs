@@ -8,11 +8,11 @@ namespace RSS_Reader.ViewModel
     [ImplementPropertyChanged]
     public class MainWindowViewModel
     {
-        private News _news;
         private int _selectedIndexListBoxNews;
         public ObservableCollection<News> LineNews { get; set; }
         public News News { get; set; }
         public Reader Reader { get; set; }
+        public ICommand OpenWebsiteCommand { get; set; }
 
         public int SelectedIndexListBoxNews
         {
@@ -20,7 +20,7 @@ namespace RSS_Reader.ViewModel
             set
             {
                 _selectedIndexListBoxNews = value;
-                Execute(null);
+                ShowDescription();
             }
         }
 
@@ -29,12 +29,21 @@ namespace RSS_Reader.ViewModel
             LineNews = new ObservableCollection<News>();
             News = new News();
             Reader = new Reader();
+            OpenWebsiteCommand=new RelayCommand(OpenWebsite, (m)=>true);
             Reader.ParseXml(LineNews);
             SelectedIndexListBoxNews = 0;
-            Execute(null);
+            ShowDescription();
         }
 
-        private void Execute(object obj)
+        private void OpenWebsite(object obj)
+        {
+            if (string.IsNullOrEmpty(LineNews[SelectedIndexListBoxNews].LinkNews) == false)
+            {
+                System.Diagnostics.Process.Start(LineNews[SelectedIndexListBoxNews].LinkNews);
+            }
+        }
+
+        private void ShowDescription()
         {
             News.Title = LineNews[SelectedIndexListBoxNews].Title;
             News.Date = LineNews[SelectedIndexListBoxNews].Date;

@@ -4,11 +4,12 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      Name="MainMetroWindow"
                       Title="RSS Reader"
                       Width="718.5"
-                      Height="543"
+                      Height="600"
                       MinWidth="740"
-                      MinHeight="543"
+                      MinHeight="580"
                       Background="AntiqueWhite"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       ResizeMode="CanResizeWithGrip"
@@ -17,8 +18,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="60*" />
+            <RowDefinition Height="40*" />
         </Grid.RowDefinitions>
 
         <ComboBox Name="CbxCategory"
@@ -48,6 +49,7 @@
         <ListBox x:Name="rssItems"
                  Grid.Row="1"
                  Margin="5"
+                 BorderThickness="1"
                  ItemsSource="{Binding LineNews}"
                  SelectedIndex="{Binding SelectedIndexListBoxNews,
                                          Mode=TwoWay,
@@ -68,26 +70,32 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Row="2"
-                    Margin="0,0,0,52"
+                    Margin="10,3,3,0"
                     Orientation="Vertical">
             <TextBlock Name="TxbTitle"
-                       Margin="3"
                        FontSize="13"
                        FontWeight="Bold"
                        Text="{Binding News.Title}" />
             <TextBlock Name="TxbDate"
-                       Margin="3"
                        Opacity="0.72"
                        Text="{Binding News.Date}" />
-            <ScrollViewer Height="100" VerticalScrollBarVisibility="Auto">
-                <TextBlock Name="TxbDescription"
-                           Margin="3"
-                           FontStyle="Italic"
-                           Text="{Binding News.Description}"
-                           TextWrapping="Wrap" />
-            </ScrollViewer>
-
+            <TextBox Name="TxbDescription"
+                     MinHeight="15"
+                     MaxHeight="100"
+                     Background="{Binding ElementName=MainMetroWindow,
+                                          Path=Background}"
+                     BorderThickness="0"
+                     FontStyle="Italic"
+                     IsReadOnly="True"
+                     ScrollViewer.CanContentScroll="True"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+                     Text="{Binding News.Description}"
+                     TextWrapping="Wrap" />
+            <TextBlock Margin="0,0,0,0">
+                <Hyperlink Command="{Binding OpenWebsiteCommand}">
+                    <Run Text="Przejdź na strone" />
+                </Hyperlink>
+            </TextBlock>
         </StackPanel>
-
     </Grid>
 </controls:MetroWindow>
