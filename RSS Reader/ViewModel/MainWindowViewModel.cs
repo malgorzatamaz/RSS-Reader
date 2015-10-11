@@ -78,7 +78,7 @@ namespace RSS_Reader.ViewModel
         private void SaveAllFromCategoryToBase()
         {
             RSSrepo rssRepo = new RSSrepo();
-            rssRepo.AddAllNews(News);
+           // rssRepo.AddAllNews(News);
         }
 
 

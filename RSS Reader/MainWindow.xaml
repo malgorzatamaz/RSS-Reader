@@ -20,7 +20,6 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-
         <ComboBox Name="CbxCategory"
                   Grid.Row="0"
                   Width="250"
