@@ -41,7 +41,23 @@ namespace RSS_Reader.DAL
             }
         }
 
-        public void GetSavedNews(string category)
-        { }
+        public void GetSavedNews(ObservableCollection<News> lineNews, string category)
+        {
+            var savedNews = _rssContext.News.Where(n => n.Category == category);
+            foreach (var news in savedNews)
+            {
+                lineNews.Add(new News
+                {
+                    Category = news.Category,
+                    Date = news.Date,
+                    Description = news.Description,
+                    Id = news.Id,
+                    Photo = news.Photo,
+                    Title = news.Title,
+                    UrlImage = news.UrlImage,
+                    UrlNews = news.UrlNews
+                });
+            }
+        }
     }
 }

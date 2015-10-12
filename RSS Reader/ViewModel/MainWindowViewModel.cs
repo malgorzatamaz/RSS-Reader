@@ -20,7 +20,6 @@ namespace RSS_Reader.ViewModel
         private int _selectedIndexTab;
         public ObservableCollection<News> LineNews { get; set; }
         public ObservableCollection<Category> ListCategories { get; set; }
-        //public ObservableCollection<News> ArchiveNews { get; set; }
         public News News { get; set; }
         public Reader Reader { get; set; }
 
@@ -89,8 +88,8 @@ namespace RSS_Reader.ViewModel
         private void Delete(object obj)
         {
             LineNews.RemoveAt(SelectedIndexListBoxNews);
-
-            // metoda usuwania z bazy by ID nowosci
+            RSSrepo rssRepo = new RSSrepo();
+            rssRepo.DeleteSelectedArticle(LineNews[0].Id);
         }
 
         private void Save(object obj)

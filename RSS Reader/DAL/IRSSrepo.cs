@@ -1,6 +1,7 @@
 ﻿using RSS_Reader.ViewModel.Dto;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,6 @@ namespace RSS_Reader.DAL
     {
         void AddSelectedArticle(News news);
         void DeleteSelectedArticle(string Id);
-        void GetSavedNews(string category);
+        void GetSavedNews(ObservableCollection<News> lineNews, string category);
     }
 }
