@@ -96,7 +96,7 @@ namespace RSS_Reader.ViewModel
         private void Delete(object obj)
         {
             RSSrepo rssRepo = new RSSrepo();
-            rssRepo.DeleteSelectedArticle(ArchiveListCategories, LineNews[0].Id);
+            rssRepo.DeleteSelectedArticle(ArchiveListCategories, LineNews[SelectedIndexListBoxNews].Id);
             if (LineNews.Count != 0)
                 LineNews.RemoveAt(SelectedIndexListBoxNews);             
         }
