@@ -61,11 +61,29 @@ namespace RSS_Reader {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;&lt;a href.
+        /// </summary>
+        public static string CheckedTwice {
+            get {
+                return ResourceManager.GetString("CheckedTwice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;/p&gt;.
         /// </summary>
         public static string EndDescription {
             get {
                 return ResourceManager.GetString("EndDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;br.
+        /// </summary>
+        public static string EndDescriptionBr {
+            get {
+                return ResourceManager.GetString("EndDescriptionBr", resourceCulture);
             }
         }
         
