@@ -40,10 +40,8 @@ namespace RSS_Reader.DAL
 
             if (!string.IsNullOrEmpty(Id))
             {
-                string selectedCategory = _rssContext.News.Where(n => n.Id == Id).Select(n => n.Category).FirstOrDefault();
+                string selectedCategory = _rssContext.News.Where(n => n.Id == Id).Select(n => n.Category).Single();
 
-                //var news = _rssContext.News.FirstOrDefault(n => n.Id == Id);
-                //_rssContext.News.Remove(news);
                 _rssContext.News.Remove(_rssContext.News.FirstOrDefault(n => n.Id == Id));
                 _rssContext.SaveChanges();
 
@@ -102,7 +100,12 @@ namespace RSS_Reader.DAL
             }
             else if (!toAdd)
             {
-                ArchiveListCategories.Remove(ArchiveListCategories.FirstOrDefault(n => n.Name == selectedCategory));
+                //ArchiveListCategories.Remove(ArchiveListCategories.FirstOrDefault(n => n.Name == selectedCategory));
+                foreach (var category in ArchiveListCategories.ToList())
+                {
+                    if (category.Name == selectedCategory)
+                        ArchiveListCategories.Remove(category);
+                }
             }
         }
     }
