@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CheckedTwice" xml:space="preserve">
+    <value>&lt;p&gt;&lt;a href</value>
+  </data>
   <data name="EndDescription" xml:space="preserve">
     <value>&lt;/p&gt;</value>
+  </data>
+  <data name="EndDescriptionBr" xml:space="preserve">
+    <value>&lt;br</value>
   </data>
   <data name="LengthId" xml:space="preserve">
     <value>7</value>
