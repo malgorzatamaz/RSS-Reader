@@ -36,7 +36,7 @@ namespace RSS_Reader.ViewModel
 
                         if (item.Links.Count > 1 && item.Links.Any(n => n.Uri.ToString().Contains(".jpg")))
                             lineNews.Last().UrlImage = item.Links[1].Uri.ToString();
-                        
+
                         ParseId(lineNews.Last());
                         ParseDescription(lineNews.Last());
                     }
@@ -57,7 +57,7 @@ namespace RSS_Reader.ViewModel
             string decode = myWriter.ToString();
             if (news.UrlImage == null)
                 start = ResourceRss.StartDescriptionWithoutImage;
-            
+
             int index = decode.IndexOf(start);
             if (index > -1)
             {
@@ -70,7 +70,8 @@ namespace RSS_Reader.ViewModel
                             description += decode[i];
                         else
                         {
-                            news.Description = description[0] == '-' ? description.Substring(1) : description;
+                            if (description != string.Empty)
+                                news.Description = description[0] == '-' ? description.Substring(1) : description;
                             return;
                         }
                     }
