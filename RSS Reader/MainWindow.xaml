@@ -57,7 +57,7 @@
                             HorizontalAlignment="Left"
                             Command="{Binding SaveAllCommand}"
                             Style="{DynamicResource SquareButtonStyle}">
-                        Zapisz wszystkie w kategorii
+                        Zapisz wszystkie wiadomości
                     </Button>
                     <Button Grid.Row="0"
                             Width="200"
@@ -66,7 +66,7 @@
                             HorizontalAlignment="Left"
                             Command="{Binding SaveCommand}"
                             Style="{DynamicResource SquareButtonStyle}">
-                        Zapisz wybrany
+                        Zapisz wybraną wiadomość
                     </Button>
                     <ListBox x:Name="rssItems"
                              Grid.Row="1"
@@ -115,7 +115,7 @@
                                  TextWrapping="Wrap" />
                         <TextBlock Margin="0,0,0,0">
                             <Hyperlink Command="{Binding OpenWebsiteCommand}">
-                                <Run Text="Przejdź na strone" />
+                                <Run Text="Otwórz stronę" />
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
@@ -171,7 +171,7 @@
                                             FontWeight="Bold"
                                             Foreground="Black"
                                             Style="{StaticResource BorderlessButton}"
-                                            ToolTip="Usunąć wiadomość" />
+                                            ToolTip="Usuń wiadomość" />
                                 </DockPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -196,7 +196,7 @@
                                  TextWrapping="Wrap" />
                         <TextBlock Margin="0,0,0,0">
                             <Hyperlink Command="{Binding OpenWebsiteCommand}">
-                                <Run Text="Przejdź na strone" />
+                                <Run Text="Otwórz stronę" />
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>

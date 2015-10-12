@@ -14,6 +14,4 @@ namespace RSS_Reader
             DataContext = new MainWindowViewModel();
         }
     }
-
-   
 }
