@@ -12,7 +12,7 @@ namespace RSS_Reader.DAL
     {
         private RSSContext _rssContext = new RSSContext();
 
-        public void AddSelectedArticle(News news)
+        public void AddSelectedArticle(ObservableCollection<Category> ArchiveListCategories, News news)
         {
             bool uniqueNews = _rssContext.News.Any(n => n.Id == news.Id);
             if (!uniqueNews)
@@ -30,19 +30,40 @@ namespace RSS_Reader.DAL
                    });
             }
             _rssContext.SaveChanges();
+
+            if(!ArchiveListCategories.Any(n => n.Name == news.Category))
+                UpdateArchiveCategory(ArchiveListCategories, news.Category, true);
         }
 
-        public void DeleteSelectedArticle(string Id)
+        public void DeleteSelectedArticle(ObservableCollection<Category> ArchiveListCategories, string Id)
         {
-            if (!string.IsNullOrEmpty(Id))
+            if (!string.IsNullOrEmpty(Id) && _rssContext.News.Count() <= 0)
             {
+                string selectedCategory = _rssContext.News.Where(n => n.Id == Id).Select(n => n.Category).FirstOrDefault();
+                
                 _rssContext.News.Remove(_rssContext.News.FirstOrDefault(n => n.Id == Id));
                 _rssContext.SaveChanges();
-            }
+
+                if (!_rssContext.News.Any(n => n.Category == selectedCategory))
+                    UpdateArchiveCategory(ArchiveListCategories, selectedCategory, false);
+             }
         }
 
-        public void GetSavedNews(ObservableCollection<News> lineNews, string category)
+        public void GetSavedNews(ObservableCollection<News> lineNews, ObservableCollection<Category> ArchiveListCategories, string category)
         {
+            if (ArchiveListCategories.Count == 0)
+            {
+                foreach (var articles in _rssContext.News)
+                {
+                    ArchiveListCategories.Add(new Category
+                        {
+                            Name = articles.Category,
+                            Url = string.Empty
+                        });
+                } 
+            }
+            
+
             var savedNews = _rssContext.News.Where(n => n.Category == category);
             foreach (var news in savedNews)
             {
@@ -57,6 +78,26 @@ namespace RSS_Reader.DAL
                     UrlImage = news.UrlImage,
                     UrlNews = news.UrlNews
                 });
+            }
+
+            
+            if (!ArchiveListCategories.Any(n => n.Name == category))
+                UpdateArchiveCategory(ArchiveListCategories, category, true);
+        }
+
+        public void UpdateArchiveCategory(ObservableCollection<Category> ArchiveListCategories, string selectedCategory, bool toAdd)
+        {
+            if (toAdd)
+            {
+                ArchiveListCategories.Add(new Category
+                {
+                    Name = selectedCategory,
+                    Url = string.Empty
+                });
+            }
+            else if (!toAdd)
+            {
+                ArchiveListCategories.Remove(ArchiveListCategories.FirstOrDefault(n => n.Name == selectedCategory));
             }
         }
     }

@@ -10,8 +10,9 @@ namespace RSS_Reader.DAL
 {
     interface IRSSrepo
     {
-        void AddSelectedArticle(News news);
-        void DeleteSelectedArticle(string Id);
-        void GetSavedNews(ObservableCollection<News> lineNews, string category);
+        void AddSelectedArticle(ObservableCollection<Category> ArchiveListCategories, News news);
+        void DeleteSelectedArticle(ObservableCollection<Category> ArchiveListCategories, string Id);
+        void GetSavedNews(ObservableCollection<News> lineNews, ObservableCollection<Category> ArchiveListCategories, string category);
+        void UpdateArchiveCategory(ObservableCollection<Category> ArchiveListCategories, string selectedCategory, bool toAdd);
     }
 }

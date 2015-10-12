@@ -89,10 +89,10 @@ namespace RSS_Reader.ViewModel
                 news.Id = string.Empty;
         }
 
-        public void ReadBase(ObservableCollection<News> lineNews, Category category)
+        public void ReadBase(ObservableCollection<News> lineNews, ObservableCollection<Category> ArchiveListCategories, Category category)
         {
             RSSrepo rssRepo = new RSSrepo();
-            rssRepo.GetSavedNews(lineNews, category.Name);
+            rssRepo.GetSavedNews(lineNews, ArchiveListCategories, category.Name);
         }
 
   

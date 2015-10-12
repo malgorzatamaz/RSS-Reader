@@ -20,6 +20,7 @@ namespace RSS_Reader.ViewModel
         private int _selectedIndexTab;
         public ObservableCollection<News> LineNews { get; set; }
         public ObservableCollection<Category> ListCategories { get; set; }
+        public ObservableCollection<Category> ArchiveListCategories { get; set; }
         public News News { get; set; }
         public Reader Reader { get; set; }
 
@@ -57,7 +58,13 @@ namespace RSS_Reader.ViewModel
             if (SelectedIndexTab == 0)
                 Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories]);
             else
-                Reader.ReadBase(LineNews, ListCategories[SelectedIndexCategories]);
+            {
+                if (SelectedIndexCategories < 0)
+                    Reader.ReadBase(LineNews, ArchiveListCategories, ListCategories[0]);
+                else
+                    Reader.ReadBase(LineNews, ArchiveListCategories, ListCategories[SelectedIndexCategories]);
+            }
+
             ShowDescription();
         }
 
@@ -74,6 +81,7 @@ namespace RSS_Reader.ViewModel
         public MainWindowViewModel()
         {
             ListCategories = new ObservableCollection<Category>();
+            ArchiveListCategories = new ObservableCollection<Category>();
             Reader = new Reader();
             OpenWebsiteCommand = new RelayCommand(OpenWebsite, (m) => true);
             SaveAllCommand = new RelayCommand(SaveAll, (m) => true);
@@ -87,9 +95,10 @@ namespace RSS_Reader.ViewModel
 
         private void Delete(object obj)
         {
-            LineNews.RemoveAt(SelectedIndexListBoxNews);
             RSSrepo rssRepo = new RSSrepo();
-            rssRepo.DeleteSelectedArticle(LineNews[0].Id);
+            rssRepo.DeleteSelectedArticle(ArchiveListCategories, LineNews[0].Id);
+            if (LineNews.Count != 0)
+                LineNews.RemoveAt(SelectedIndexListBoxNews);             
         }
 
         private void Save(object obj)
@@ -108,7 +117,7 @@ namespace RSS_Reader.ViewModel
             newsSave.Photo = GetImageAsByte(newsSave.UrlImage);
 
             RSSrepo rssRepo = new RSSrepo();
-            rssRepo.AddSelectedArticle(newsSave);
+            rssRepo.AddSelectedArticle(ArchiveListCategories, newsSave);
         }
 
         private void SaveAll(object obj)

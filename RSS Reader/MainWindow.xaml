@@ -141,7 +141,7 @@
                               BorderBrush="Black"
                               BorderThickness="2"
                               DisplayMemberPath="Name"
-                              ItemsSource="{Binding ListCategories}"
+                              ItemsSource="{Binding ArchiveListCategories}"
                               SelectedIndex="{Binding SelectedIndexCategories,
                                                       Mode=TwoWay,
                                                       UpdateSourceTrigger=PropertyChanged}" />
