@@ -61,6 +61,15 @@ namespace RSS_Reader {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;&lt;a href.
+        /// </summary>
+        public static string CheckedTwice {
+            get {
+                return ResourceManager.GetString("CheckedTwice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;/p&gt;.
         /// </summary>
         public static string EndDescription {
@@ -70,11 +79,29 @@ namespace RSS_Reader {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;br.
+        /// </summary>
+        public static string EndDescriptionBr {
+            get {
+                return ResourceManager.GetString("EndDescriptionBr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 7.
         /// </summary>
         public static string LengthId {
             get {
                 return ResourceManager.GetString("LengthId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;.
+        /// </summary>
+        public static string OneSymbol {
+            get {
+                return ResourceManager.GetString("OneSymbol", resourceCulture);
             }
         }
         
@@ -102,6 +129,15 @@ namespace RSS_Reader {
         public static string StartDescriptionWithoutImage {
             get {
                 return ResourceManager.GetString("StartDescriptionWithoutImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to p.
+        /// </summary>
+        public static string TwoSymbol {
+            get {
+                return ResourceManager.GetString("TwoSymbol", resourceCulture);
             }
         }
         
