@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Windows.Input;
 using HtmlAgilityPack;
 using PropertyChanged;
@@ -146,6 +147,8 @@ namespace RSS_Reader.ViewModel
             var listUrls = new List<string>();
 
             WebClient webClient = new WebClient();
+            Encoding enc = Encoding.GetEncoding("ISO-8859-2");
+            webClient.Encoding = enc;
             string page = webClient.DownloadString(ResourceRss.UrlWebsite);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(page);
