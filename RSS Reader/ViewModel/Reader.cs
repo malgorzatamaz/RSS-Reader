@@ -8,6 +8,7 @@ using System.Web;
 using System.Windows;
 using System.Xml;
 using RSS_Reader.ViewModel.Dto;
+using RSS_Reader.DAL;
 
 namespace RSS_Reader.ViewModel
 {
@@ -78,7 +79,7 @@ namespace RSS_Reader.ViewModel
             }
         }
 
-        private void ParseId(News news)
+        public void ParseId(News news)
         {
             string ipLong = news.Id;
             int index = ipLong.IndexOf(ResourceRss.SearchId);
@@ -90,8 +91,11 @@ namespace RSS_Reader.ViewModel
 
         public void ReadBase(ObservableCollection<News> lineNews, Category category)
         {
-            // czytamy z bazy i dodajemy do lineNews
-            ParseXml(lineNews, category);
+            RSSrepo rssRepo = new RSSrepo();
+            rssRepo.GetSavedNews(lineNews, category.Name);
         }
+
+  
+
     }
 }

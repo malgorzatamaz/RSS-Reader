@@ -11,5 +11,7 @@ namespace RSS_Reader.ViewModel.Dto
         public string UrlImage { get; set; }
         public string UrlNews { get; set; }
         public string Category { get; set; }
+        public byte[] Photo { get; set; }
+      
     }
 }
