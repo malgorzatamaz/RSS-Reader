@@ -31,38 +31,43 @@ namespace RSS_Reader.DAL
             }
             _rssContext.SaveChanges();
 
-            if(!ArchiveListCategories.Any(n => n.Name == news.Category))
+            if (!ArchiveListCategories.Any(n => n.Name == news.Category))
                 UpdateArchiveCategory(ArchiveListCategories, news.Category, true);
         }
 
         public void DeleteSelectedArticle(ObservableCollection<Category> ArchiveListCategories, string Id)
         {
-            if (!string.IsNullOrEmpty(Id) && _rssContext.News.Count() <= 0)
+
+            if (!string.IsNullOrEmpty(Id))
             {
                 string selectedCategory = _rssContext.News.Where(n => n.Id == Id).Select(n => n.Category).FirstOrDefault();
-                
+
+                //var news = _rssContext.News.FirstOrDefault(n => n.Id == Id);
+                //_rssContext.News.Remove(news);
                 _rssContext.News.Remove(_rssContext.News.FirstOrDefault(n => n.Id == Id));
                 _rssContext.SaveChanges();
 
                 if (!_rssContext.News.Any(n => n.Category == selectedCategory))
                     UpdateArchiveCategory(ArchiveListCategories, selectedCategory, false);
-             }
+            }
+
         }
 
         public void GetSavedNews(ObservableCollection<News> lineNews, ObservableCollection<Category> ArchiveListCategories, string category)
         {
             if (ArchiveListCategories.Count == 0)
             {
-                foreach (var articles in _rssContext.News)
+                var articles = _rssContext.News.GroupBy(n => n.Category).Select(n => n.FirstOrDefault()).ToList();
+                foreach (var a in articles)
                 {
                     ArchiveListCategories.Add(new Category
                         {
-                            Name = articles.Category,
+                            Name = a.Category,
                             Url = string.Empty
                         });
-                } 
+                }
             }
-            
+
 
             var savedNews = _rssContext.News.Where(n => n.Category == category);
             foreach (var news in savedNews)
@@ -80,7 +85,7 @@ namespace RSS_Reader.DAL
                 });
             }
 
-            
+
             if (!ArchiveListCategories.Any(n => n.Name == category))
                 UpdateArchiveCategory(ArchiveListCategories, category, true);
         }
