@@ -97,6 +97,15 @@ namespace RSS_Reader {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;.
+        /// </summary>
+        public static string OneSymbol {
+            get {
+                return ResourceManager.GetString("OneSymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ,nId,.
         /// </summary>
         public static string SearchId {
@@ -120,6 +129,15 @@ namespace RSS_Reader {
         public static string StartDescriptionWithoutImage {
             get {
                 return ResourceManager.GetString("StartDescriptionWithoutImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to p.
+        /// </summary>
+        public static string TwoSymbol {
+            get {
+                return ResourceManager.GetString("TwoSymbol", resourceCulture);
             }
         }
         

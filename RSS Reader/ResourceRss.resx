@@ -129,6 +129,9 @@
   <data name="LengthId" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="OneSymbol" xml:space="preserve">
+    <value>&lt;</value>
+  </data>
   <data name="SearchId" xml:space="preserve">
     <value>,nId,</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="StartDescriptionWithoutImage" xml:space="preserve">
     <value>&lt;p&gt;</value>
+  </data>
+  <data name="TwoSymbol" xml:space="preserve">
+    <value>p</value>
   </data>
   <data name="UrlWebsite" xml:space="preserve">
     <value>http://rss.interia.pl/</value>

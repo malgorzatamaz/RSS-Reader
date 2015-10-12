@@ -58,7 +58,7 @@ namespace RSS_Reader.ViewModel
             HttpUtility.HtmlDecode(news.Description, myWriter);
             string decode = myWriter.ToString();
 
-            if (decode[0] == '<' && decode[1] == 'p')
+            if (decode[0] == Convert.ToChar(ResourceRss.OneSymbol) && decode[1] == Convert.ToChar(ResourceRss.TwoSymbol))
             {
                 start = ResourceRss.StartDescription;
                 if (news.UrlImage == null && decode.Contains(ResourceRss.CheckedTwice) == false)
@@ -105,7 +105,7 @@ namespace RSS_Reader.ViewModel
             rssRepo.GetSavedNews(lineNews, category.Name);
         }
 
-  
+
 
     }
 }
