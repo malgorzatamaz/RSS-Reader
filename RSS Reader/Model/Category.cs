@@ -1,4 +1,4 @@
-﻿namespace RSS_Reader.ViewModel.Dto
+﻿namespace RSS_Reader.Model
 {
     public class Category
     {

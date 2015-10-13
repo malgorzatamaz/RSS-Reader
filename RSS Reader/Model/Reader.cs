@@ -7,13 +7,20 @@ using System.ServiceModel.Syndication;
 using System.Web;
 using System.Windows;
 using System.Xml;
-using RSS_Reader.ViewModel.Dto;
 using RSS_Reader.DAL;
 
-namespace RSS_Reader.ViewModel
+namespace RSS_Reader.Model
 {
+    /// <summary>
+    /// Primary reader class for decode news from Xml
+    /// </summary>
     public class Reader
     {
+        /// <summary>
+        /// Select page by category url and writes all news to collection. 
+        /// </summary>
+        /// <param name="lineNews">Bind-able colection with news.</param>
+        /// <param name="category">Source category for reading.</param>
         public void ParseXml(ObservableCollection<News> lineNews, Category category)
         {
             try
@@ -48,6 +55,11 @@ namespace RSS_Reader.ViewModel
             }
         }
 
+
+        /// <summary>
+        /// Decoding from HTML description to normal text description. 
+        /// </summary>
+        /// <param name="news">Target news for decoding</param>
         private void ParseDescription(News news)
         {
             StringWriter myWriter = new StringWriter();
@@ -89,6 +101,10 @@ namespace RSS_Reader.ViewModel
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="news"></param>
         public void ParseId(News news)
         {
             string ipLong = news.Id;

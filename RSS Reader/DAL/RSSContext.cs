@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using RSS_Reader.Model;
 
-namespace RSS_Reader.ViewModel.Dto
+namespace RSS_Reader.DAL
 {
     public class RSSContext : DbContext
     {

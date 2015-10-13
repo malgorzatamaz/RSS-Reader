@@ -79,14 +79,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAL\RSSContext.cs" />
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\News.cs" />
+    <Compile Include="Model\Reader.cs" />
     <Compile Include="ResourceRss.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceRss.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Dto\RSSContext.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\Reader.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -104,8 +106,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModel\Dto\Category.cs" />
-    <Compile Include="ViewModel\Dto\News.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

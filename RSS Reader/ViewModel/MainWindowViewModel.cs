@@ -7,8 +7,8 @@ using System.Text;
 using System.Windows.Input;
 using HtmlAgilityPack;
 using PropertyChanged;
-using RSS_Reader.ViewModel.Dto;
 using RSS_Reader.DAL;
+using RSS_Reader.Model;
 
 
 namespace RSS_Reader.ViewModel

@@ -1,5 +1,6 @@
 ﻿using PropertyChanged;
-namespace RSS_Reader.ViewModel.Dto
+
+namespace RSS_Reader.Model
 {
     [ImplementPropertyChanged]
     public class News
