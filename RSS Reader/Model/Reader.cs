@@ -12,15 +12,15 @@ using RSS_Reader.DAL;
 namespace RSS_Reader.Model
 {
     /// <summary>
-    /// Primary reader class for decode news from Xml
+    /// Klasa służąca odczytu danych wiadomości z plików xml i html
     /// </summary>
     public class Reader
     {
         /// <summary>
-        /// Select page by category url and writes all news to observable collection 
+        /// Wybiera stronę na podstawie adresu url i zapisuje wszystkie wiadomości w kolekcji
         /// </summary>
-        /// <param name="lineNews">Bind-able colection for news</param>
-        /// <param name="category">Source category for reading</param>
+        /// <param name="lineNews">Lista wiadomości</param>
+        /// <param name="category">Kategoria źródłowa do odczytu</param>
         public void ParseXml(ObservableCollection<News> lineNews, Category category)
         {
             try
@@ -57,9 +57,9 @@ namespace RSS_Reader.Model
 
 
         /// <summary>
-        /// Decoding from HTML description to normal text description 
+        /// Dekoduje z opisu ze znacznikami HTML do normalnego opisu 
         /// </summary>
-        /// <param name="news">Target news for decoding description</param>
+        /// <param name="news">Wiadomość do dekodowania</param>
         private void ParseDescription(News news)
         {
             StringWriter myWriter = new StringWriter();
@@ -102,9 +102,9 @@ namespace RSS_Reader.Model
         }
 
         /// <summary>
-        /// Decoding from HTML id to normal text id. 
+        /// Dekoduje z id ze znacznikami HTML do normalnego id 
         /// </summary>
-        /// <param name="news">Target news for decoding id.</param>
+        /// <param name="news">Wiadomość do dekodowania</param>
         public void ParseId(News news)
         {
             string ipLong = news.Id;
@@ -113,11 +113,11 @@ namespace RSS_Reader.Model
         }
 
         /// <summary>
-        /// Read data from database by category and copy to observable collections
+        /// Odczytuje dane z bazy na podstawie kategorii i kopiuje do podanej kolekcji
         /// </summary>
-        /// <param name="lineNews">Bind-able colection for news</param>
-        /// <param name="ArchiveListCategories">Bind-able colection for categories</param>
-        /// <param name="category">Source category</param>
+        /// <param name="lineNews">Kolekcja do wczytania wiadomości</param>
+        /// <param name="ArchiveListCategories">Kolkcja do wczytania wszystkich kategorii w archiwum</param>
+        /// <param name="category">Docelowa kategoria</param>
         public void ReadBase(ObservableCollection<News> lineNews, ObservableCollection<Category> ArchiveListCategories, Category category)
         {
             IRSSrepo rssRepo = new RSSrepo();
