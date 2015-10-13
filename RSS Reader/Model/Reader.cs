@@ -17,10 +17,10 @@ namespace RSS_Reader.Model
     public class Reader
     {
         /// <summary>
-        /// Select page by category url and writes all news to collection. 
+        /// Select page by category url and writes all news to observable collection 
         /// </summary>
-        /// <param name="lineNews">Bind-able colection with news.</param>
-        /// <param name="category">Source category for reading.</param>
+        /// <param name="lineNews">Bind-able colection for news</param>
+        /// <param name="category">Source category for reading</param>
         public void ParseXml(ObservableCollection<News> lineNews, Category category)
         {
             try
@@ -57,9 +57,9 @@ namespace RSS_Reader.Model
 
 
         /// <summary>
-        /// Decoding from HTML description to normal text description. 
+        /// Decoding from HTML description to normal text description 
         /// </summary>
-        /// <param name="news">Target news for decoding</param>
+        /// <param name="news">Target news for decoding description</param>
         private void ParseDescription(News news)
         {
             StringWriter myWriter = new StringWriter();
@@ -102,27 +102,26 @@ namespace RSS_Reader.Model
         }
 
         /// <summary>
-        /// 
+        /// Decoding from HTML id to normal text id. 
         /// </summary>
-        /// <param name="news"></param>
+        /// <param name="news">Target news for decoding id.</param>
         public void ParseId(News news)
         {
             string ipLong = news.Id;
             int index = ipLong.IndexOf(ResourceRss.SearchId);
-            //if (index > -1 && ipLong.Length > index + ResourceRss.SearchId.Length + Convert.ToInt32(ResourceRss.LengthId))
-            news.Id = ipLong.Substring(index + ResourceRss.SearchId.Length, Convert.ToInt32(ResourceRss.LengthId));
-            //else
-            //    news.Id = string.Empty;
-                
+            news.Id = ipLong.Substring(index + ResourceRss.SearchId.Length, Convert.ToInt32(ResourceRss.LengthId));      
         }
 
+        /// <summary>
+        /// Read data from database by category and copy to observable collections
+        /// </summary>
+        /// <param name="lineNews">Bind-able colection for news</param>
+        /// <param name="ArchiveListCategories">Bind-able colection for categories</param>
+        /// <param name="category">Source category</param>
         public void ReadBase(ObservableCollection<News> lineNews, ObservableCollection<Category> ArchiveListCategories, Category category)
         {
-            RSSrepo rssRepo = new RSSrepo();
+            IRSSrepo rssRepo = new RSSrepo();
             rssRepo.GetSavedNews(lineNews, ArchiveListCategories, category.Name);
         }
-
-
-
     }
 }
