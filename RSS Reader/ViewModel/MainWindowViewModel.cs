@@ -13,6 +13,9 @@ using RSS_Reader.Model;
 
 namespace RSS_Reader.ViewModel
 {
+    /// <summary>
+    /// Klasa do obsługi głównego okna
+    /// </summary>
     [ImplementPropertyChanged]
     public class MainWindowViewModel
     {
@@ -51,6 +54,9 @@ namespace RSS_Reader.ViewModel
             }
         }
 
+        /// <summary>
+        /// Wyświetla informacje wiadomości na zakładce nowe, lub wczytuje wiadomości z bazy na zakładce archiwalne
+        /// </summary>
         private void ReadNews()
         {
             LineNews = new ObservableCollection<News>();
@@ -79,6 +85,9 @@ namespace RSS_Reader.ViewModel
             }
         }
 
+        /// <summary>
+        /// Konstruktor klasy obsugującej główne okno
+        /// </summary>
         public MainWindowViewModel()
         {
             ListCategories = new ObservableCollection<Category>();
@@ -95,7 +104,10 @@ namespace RSS_Reader.ViewModel
             SelectedIndexCategories = 0;
             ReadNews();
         }
-
+        /// <summary>
+        /// Wywołuje funkcje usuwania wiadomości z bazy danych i usuwa ją z wyświetlanej listy
+        /// </summary>
+        /// <param name="obj">wiadomość do usunięcia</param>
         private void Delete(object obj)
         {
             RSSrepo rssRepo = new RSSrepo();
@@ -103,7 +115,10 @@ namespace RSS_Reader.ViewModel
             if (LineNews.Count != 0)
                 LineNews.RemoveAt(SelectedIndexListBoxNews);
         }
-
+        /// <summary>
+        /// Wywołuje funkcje do zapisywania wiadomości do bazy danych
+        /// </summary>
+        /// <param name="obj"></param>
         private void Save(object obj)
         {
             News newsSave = new News();
@@ -123,6 +138,10 @@ namespace RSS_Reader.ViewModel
             rssRepo.AddSelectedArticle(ArchiveListCategories, newsSave);
         }
 
+        /// <summary>
+        /// Zapisuje wszystkie wiadomości
+        /// </summary>
+        /// <param name="obj"></param>
         private void SaveAll(object obj)
         {
             for (int i = 0; i < LineNews.Count; i++)
@@ -131,6 +150,10 @@ namespace RSS_Reader.ViewModel
             }
         }
 
+        /// <summary>
+        /// Przenosi do strony wybranej wiadomości
+        /// </summary>
+        /// <param name="obj">Wybrana wiadomość</param>
         private void OpenWebsite(object obj)
         {
             if (LineNews.Any())
@@ -140,6 +163,9 @@ namespace RSS_Reader.ViewModel
                 }
         }
 
+        /// <summary>
+        /// Wyświetla opis wiadomości
+        /// </summary>
         private void ShowDescription()
         {
             if (LineNews.Count > 0 && SelectedIndexListBoxNews > -1)
@@ -152,6 +178,9 @@ namespace RSS_Reader.ViewModel
 
         }
 
+        /// <summary>
+        /// Funkcja do wczytywania kategorii i ich linków. Zmienia kodowanie.
+        /// </summary>
         private void GetCategories()
         {
             var listTitles = new List<string>();
@@ -179,7 +208,11 @@ namespace RSS_Reader.ViewModel
                 ListCategories.Add(new Category { Name = listTitles[i], Url = listUrls[i] });
             }
         }
-
+        /// <summary>
+        /// Funkcja która zapisuje obrazek jako tablicę bajtów
+        /// </summary>
+        /// <param name="LinkImage"></param>
+        /// <returns></returns>
         private byte[] GetImageAsByte(string LinkImage)
         {
             if (!string.IsNullOrWhiteSpace(LinkImage))
