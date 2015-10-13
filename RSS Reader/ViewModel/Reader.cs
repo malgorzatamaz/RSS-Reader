@@ -93,10 +93,11 @@ namespace RSS_Reader.ViewModel
         {
             string ipLong = news.Id;
             int index = ipLong.IndexOf(ResourceRss.SearchId);
-            if (index > -1 && ipLong.Length > index + ResourceRss.SearchId.Length + Convert.ToInt32(ResourceRss.LengthId))
-                news.Id = ipLong.Substring(index + ResourceRss.SearchId.Length, Convert.ToInt32(ResourceRss.LengthId));
-            else
-                news.Id = string.Empty;
+            //if (index > -1 && ipLong.Length > index + ResourceRss.SearchId.Length + Convert.ToInt32(ResourceRss.LengthId))
+            news.Id = ipLong.Substring(index + ResourceRss.SearchId.Length, Convert.ToInt32(ResourceRss.LengthId));
+            //else
+            //    news.Id = string.Empty;
+                
         }
 
         public void ReadBase(ObservableCollection<News> lineNews, ObservableCollection<Category> ArchiveListCategories, Category category)

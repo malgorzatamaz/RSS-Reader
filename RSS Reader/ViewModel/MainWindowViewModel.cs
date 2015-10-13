@@ -58,14 +58,14 @@ namespace RSS_Reader.ViewModel
             SelectedIndexListBoxNews = 0;
             if (SelectedIndexTab == 0)
                 Reader.ParseXml(LineNews, ListCategories[SelectedIndexCategories]);
-            else
+            else if (ArchiveListCategories.Any())
             {
                 if (SelectedIndexCategories < 0)
-                    Reader.ReadBase(LineNews, ArchiveListCategories, ListCategories[0]);
+                    Reader.ReadBase(LineNews, ArchiveListCategories, ArchiveListCategories[0]);
                 else
-                    Reader.ReadBase(LineNews, ArchiveListCategories, ListCategories[SelectedIndexCategories]);
+                    Reader.ReadBase(LineNews, ArchiveListCategories, ArchiveListCategories[SelectedIndexCategories]);
             }
-
+                
             ShowDescription();
         }
 
@@ -83,6 +83,8 @@ namespace RSS_Reader.ViewModel
         {
             ListCategories = new ObservableCollection<Category>();
             ArchiveListCategories = new ObservableCollection<Category>();
+            RSSrepo rssRepo = new RSSrepo();
+            rssRepo.GetListArchiveCategories(ArchiveListCategories);
             Reader = new Reader();
             OpenWebsiteCommand = new RelayCommand(OpenWebsite, (m) => true);
             SaveAllCommand = new RelayCommand(SaveAll, (m) => true);
@@ -99,7 +101,7 @@ namespace RSS_Reader.ViewModel
             RSSrepo rssRepo = new RSSrepo();
             rssRepo.DeleteSelectedArticle(ArchiveListCategories, LineNews[SelectedIndexListBoxNews].Id);
             if (LineNews.Count != 0)
-                LineNews.RemoveAt(SelectedIndexListBoxNews);             
+                LineNews.RemoveAt(SelectedIndexListBoxNews);
         }
 
         private void Save(object obj)

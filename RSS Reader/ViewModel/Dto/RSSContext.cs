@@ -13,7 +13,7 @@ namespace RSS_Reader.ViewModel.Dto
 
         public RSSContext()
         {
-            Database.SetInitializer<RSSContext>(new DropCreateDatabaseIfModelChanges<RSSContext>());
+            Database.SetInitializer<RSSContext>(new DropCreateDatabaseAlways<RSSContext>());
         }
     }
 }
