@@ -211,7 +211,7 @@ namespace RSS_Reader.ViewModel
         /// <summary>
         /// Funkcja która zapisuje obrazek jako tablicę bajtów
         /// </summary>
-        /// <param name="LinkImage"></param>
+        /// <param name="LinkImage">link, z którego pobierany jest obrazek</param>
         /// <returns></returns>
         private byte[] GetImageAsByte(string LinkImage)
         {

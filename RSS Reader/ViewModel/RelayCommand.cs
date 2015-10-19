@@ -3,6 +3,9 @@ using System.Windows.Input;
 
 namespace RSS_Reader.ViewModel
 {
+    /// <summary>
+    /// Klasa do obsługi funkcji wywoływanych z interface'u użytkownika
+    /// </summary>
     public class RelayCommand : ICommand
     {
         readonly Action<object> _execute;
