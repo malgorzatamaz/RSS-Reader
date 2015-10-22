@@ -15,7 +15,7 @@ namespace RSS_Reader.DAL
         /// </summary>
         public RSSContext()
         {
-            Database.SetInitializer<RSSContext>(new DropCreateDatabaseAlways<RSSContext>());
+            Database.SetInitializer<RSSContext>(new CreateDatabaseIfNotExists<RSSContext>());
         }
     }
 }
