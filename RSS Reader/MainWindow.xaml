@@ -153,15 +153,6 @@
                              SelectedIndex="{Binding SelectedIndexListBoxNews,
                                                      Mode=TwoWay,
                                                      UpdateSourceTrigger=PropertyChanged}">
-                        <ListBox.Resources>
-                            <Style BasedOn="{StaticResource {x:Type ListBoxItem}}" TargetType="ListBoxItem">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
-                                        <Setter Property="IsSelected" Value="True" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel DataContext="{TemplateBinding DataContext}">
@@ -181,7 +172,7 @@
                                             Command="{Binding Path=DataContext.DeleteCommand,
                                                               RelativeSource={RelativeSource FindAncestor,
                                                                                              AncestorType={x:Type ListBox}}}"
-                                            CommandParameter="{Binding}"
+                                            CommandParameter="{Binding Id}"
                                             Content="X"
                                             FontFamily="Verdana"
                                             FontSize="12"
