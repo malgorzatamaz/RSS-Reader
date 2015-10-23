@@ -71,7 +71,7 @@ namespace RSS_Reader.ViewModel
                 else
                     Reader.ReadBase(LineNews, ArchiveListCategories, ArchiveListCategories[SelectedIndexCategories]);
             }
-                
+
             ShowDescription();
         }
 
@@ -107,13 +107,19 @@ namespace RSS_Reader.ViewModel
         /// <summary>
         /// Wywołuje funkcje usuwania wiadomości z bazy danych i usuwa ją z wyświetlanej listy
         /// </summary>
-        /// <param name="obj">wiadomość do usunięcia</param>
+        /// <param name="obj"> id wiadomości do usunięcia</param>
         private void Delete(object obj)
         {
             RSSrepo rssRepo = new RSSrepo();
-            rssRepo.DeleteSelectedArticle(ArchiveListCategories, LineNews[SelectedIndexListBoxNews].Id);
+            string id = (string)obj;
+            rssRepo.DeleteSelectedArticle(ArchiveListCategories, id);
             if (LineNews.Count != 0)
-                LineNews.RemoveAt(SelectedIndexListBoxNews);
+            {
+                LineNews.Remove(LineNews.First(n => n.Id == id));
+                if (SelectedIndexListBoxNews < 0)
+                    SelectedIndexListBoxNews = 0;
+            }
+
         }
         /// <summary>
         /// Wywołuje funkcje do zapisywania wiadomości do bazy danych
@@ -175,7 +181,6 @@ namespace RSS_Reader.ViewModel
                 News.Description = LineNews[SelectedIndexListBoxNews].Description;
                 News.UrlNews = LineNews[SelectedIndexListBoxNews].UrlNews;
             }
-
         }
 
         /// <summary>
